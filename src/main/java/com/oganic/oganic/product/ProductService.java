@@ -21,4 +21,8 @@ public class ProductService {
 	public List<Product> getLatestProducts() {
 		return productRepository.findAll(Sort.by("createdAt"));
 	}
+
+	public List<Product> getDiscountProducts() {
+		return productRepository.findDiscount();
+	}
 }

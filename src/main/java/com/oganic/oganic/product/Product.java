@@ -37,6 +37,8 @@ public class Product {
 
 	private String image;
 
+	private Double discount;
+
 	@Column(name = "created_at")
 	private LocalDateTime createdAt;
 
@@ -73,6 +75,14 @@ public class Product {
 
 	public void setImage(String image) {
 		this.image = image;
+	}
+
+	public Double getDiscount() {
+		return discount;
+	}
+
+	public void setDiscount(Double discount) {
+		this.discount = discount;
 	}
 
 }
