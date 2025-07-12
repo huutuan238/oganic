@@ -202,13 +202,14 @@
                                     <span>Sort By</span>
                                     <select>
                                         <option value="0">Default</option>
-                                        <option value="0">Default</option>
+                                        <option value="1">Price</option>
+                                        <option value="2">Favorite</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-4">
                                 <div class="filter__found">
-                                    <h6><span>16</span> Products found</h6>
+                                    <h6><span th:text="${products.size()}"></span> Products found</h6>
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-3">
@@ -262,6 +263,7 @@
     <script src="js/mixitup.min.js"></script>
     <script src="js/owl.carousel.min.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/product.js"></script>
 
 
 
