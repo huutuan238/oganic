@@ -28,13 +28,16 @@ public class ProductController {
 	@GetMapping("/product")
 	public String getAllProduct(@RequestParam("page") Optional<Integer> page,  Model model) {
 		Integer pageNumber = page.orElse(1);
-		Page<Product> pageProducts = productService.getProductsPageable(pageNumber - 1,2);
+		Page<Product> pageProduct = productService.getProductsPageable(pageNumber - 1,2);
 		List<Product> latestProducts = productService.getLatestProducts();
 		List<Product> discountProducts = productService.getDiscountProducts();
 		List<Category> categories = categoryService.getCategories();
 
-		model.addAttribute("products", pageProducts.getContent());
-		model.addAttribute("productTotals", pageProducts.getTotalElements());
+		model.addAttribute("products", pageProduct.getContent());
+		model.addAttribute("productTotals", pageProduct.getTotalElements());
+		model.addAttribute("totalPage", pageProduct.getTotalPages());
+		model.addAttribute("currentPage", pageNumber);
+
 		model.addAttribute("latestProducts", latestProducts);
 		model.addAttribute("categories", categories);
 		model.addAttribute("discountProducts", discountProducts);
