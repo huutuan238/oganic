@@ -152,9 +152,9 @@
                                 <h4>Latest Products</h4>
                                 <div class="latest-product__slider owl-carousel">
                                     <div class="latest-prdouct__slider__item" th:each="latestProduct : ${latestProducts}">
-                                        <a href="#" class="latest-product__item">
+                                        <a th:href="@{'/product/' + ${latestProduct.id}}" class="latest-product__item">
                                             <div class="latest-product__item__pic">
-                                                <img src="img/latest-product/lp-1.jpg" alt="">
+                                                <img th:src="@{${latestProduct.image}}" alt="">
                                             </div>
                                             <div class="latest-product__item__text">
                                                 <h6 th:text="${latestProduct.name}"></h6>
@@ -176,8 +176,7 @@
                             <div class="product__discount__slider owl-carousel">
                                 <div class="col-lg-4"  th:each="discountProduct : ${discountProducts}">
                                     <div class="product__discount__item">
-                                        <div class="product__discount__item__pic set-bg"
-                                            data-setbg="img/product/discount/pd-1.jpg">
+                                        <div class="product__discount__item__pic set-bg" th:attr="data-setbg=${discountProduct.image}">
                                             <div class="product__discount__percent" th:text="${discountProduct.discount}"></div>
                                             <ul class="product__item__pic__hover">
                                                 <li><a href="#"><i class="fa fa-heart"></i></a></li>
@@ -187,7 +186,7 @@
                                         </div>
                                         <div class="product__discount__item__text">
                                             <span>Dried Fruit</span>
-                                            <h5><a href="#" th:text="${discountProduct.name}"></a></h5>
+                                            <h5><a th:href="@{'/product/' + ${discountProduct.id}}" th:text="${discountProduct.name}"></a></h5>
                                             <div class="product__item__price">99<span th:text="${discountProduct.price}"></span></div>
                                         </div>
                                     </div>
@@ -223,7 +222,7 @@
                     <div class="row" name="list-products">
                         <div class="col-lg-4 col-md-6 col-sm-6" th:each="product : ${products}">
                             <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="img/product/product-1.jpg">
+                                <div class="product__item__pic set-bg" th:attr="data-setbg=${product.image}">
                                     <ul class="product__item__pic__hover">
                                         <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                         <li><a href="#"><i class="fa fa-retweet"></i></a></li>
