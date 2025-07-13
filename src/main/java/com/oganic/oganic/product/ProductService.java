@@ -34,4 +34,8 @@ public class ProductService {
 	public List<Product> getDiscountProducts() {
 		return productRepository.findDiscount();
 	}
+
+	public Product getById(Long id){
+		return productRepository.findById(id).orElse(null);
+	}
 }

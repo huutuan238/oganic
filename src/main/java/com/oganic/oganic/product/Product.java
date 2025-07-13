@@ -15,9 +15,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-//@Data
-//@AllArgsConstructor
-//@NoArgsConstructor
+// @Data
+// @AllArgsConstructor
+// @NoArgsConstructor
 public class Product {
 
 	@Id
@@ -83,6 +83,14 @@ public class Product {
 
 	public void setDiscount(Double discount) {
 		this.discount = discount;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 }
