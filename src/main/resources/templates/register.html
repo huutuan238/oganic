@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Ogani Template">
+    <meta name="keywords" content="Ogani, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Ogani | Register</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+</head>
+
+<body>
+    <!-- Header Section Begin -->
+    <div th:insert="~{header :: header}">
+    </div>
+
+    <!-- Checkout Section Begin -->
+    <section class="register">
+        <div class="container">
+            <div class="checkout__form">
+                <h3 class="text-center mb-3" style="color: #7fad39;">Register</h3>
+                <form th:action="@{'./register'}" method="POST">
+                    <div class="row">
+                        <div class="col-lg-8 col-md-6 mx-auto">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="checkout__input">
+                                        <p>Fist Name<span>*</span></p>
+                                        <input type="text">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="checkout__input">
+                                        <p>Last Name<span>*</span></p>
+                                        <input type="text">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="checkout__input">
+                                <p>Email<span>*</span></p>
+                                <input type="text" placeholder="Street Address" class="checkout__input__add">
+                            </div>
+                            <div class="checkout__input">
+                                <p>Password<span>*</span></p>
+                                <input type="text">
+                            </div>
+                            <div class="checkout__input">
+                                <p>Confirm Password<span>*</span></p>
+                                <input type="text">
+                            </div>
+                            <div class="checkout__input">
+                                <p>Phone<span>*</span></p>
+                                <input type="text" placeholder="Street Address" class="checkout__input__add">
+                            </div>
+                            <div class="checkout__input">
+                                <p>Address<span>*</span></p>
+                                <input type="text" placeholder="Street Address" class="checkout__input__add">
+                            </div>
+                            <div class="register-button mb-3">
+                                <button type="submit" class="site-btn">Register</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+    <!-- Checkout Section End -->
+
+    <!-- Footer Section Begin -->
+    <div th:insert="~{footer :: footer}">
+    </div>
+    <!-- Footer Section End -->
+
+    <!-- Js Plugins -->
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.nice-select.min.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
+    <script src="js/jquery.slicknav.js"></script>
+    <script src="js/mixitup.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/main.js"></script>
+
+
+
+</body>
+
+</html>
