@@ -10,6 +10,7 @@
             </ul>
         </div>
         <div class="product__item__text">
+             <span th:text="${product.category.name}"></span>
             <h6><a th:href="@{'/product/' + ${product.id}}" th:text="${product.name}"></a></h6>
             <h5 th:text="${product.price}"></h5>
         </div>

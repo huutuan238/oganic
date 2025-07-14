@@ -16,7 +16,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     List<Product> findDiscount();
 
      @Query("SELECT p FROM Product p WHERE " + 
-            "(:categoryId IS NULL OR p.categoryId = :categoryId) AND " +
+            "(:categoryId IS NULL OR p.category.id = :categoryId) AND " +
             "(:q IS NULL OR p.name LIKE CONCAT('%', :q, '%'))"
      )
     Page<Product> search(@Param("categoryId") Integer categoryId, @Param("q") String q, Pageable pageable);
