@@ -53,8 +53,8 @@
     });
 
     /*------------------
-		Navigation
-	--------------------*/
+        Navigation
+    --------------------*/
     $(".mobile-menu").slicknav({
         prependTo: '#mobile-menu-wrap',
         allowParentLinks: true
@@ -160,8 +160,8 @@
     });
 
     /*-----------------------
-		Price Range Slider
-	------------------------ */
+        Price Range Slider
+    ------------------------ */
     var rangeSlider = $(".price-range"),
         minamount = $("#minamount"),
         maxamount = $("#maxamount"),
@@ -186,8 +186,8 @@
     $("select").niceSelect();
 
     /*------------------
-		Single Product
-	--------------------*/
+        Single Product
+    --------------------*/
     $('.product__details__pic__slider img').on('click', function () {
 
         var imgurl = $(this).data('imgbigurl');
@@ -200,8 +200,8 @@
     });
 
     /*-------------------
-		Quantity change
-	--------------------- */
+        Quantity change
+    --------------------- */
     var proQty = $('.pro-qty');
     proQty.prepend('<span class="dec qtybtn">-</span>');
     proQty.append('<span class="inc qtybtn">+</span>');
@@ -219,9 +219,30 @@
             }
         }
         $button.parent().find('input').val(newVal);
+        updateTotalPriceProduct($button, newVal);
     });
+    
 
 })(jQuery);
+
+const updateTotalPriceProduct = (ele, quantity) => {
+    const rowEle = ele.closest('tr');
+    const price = rowEle.find("[name='price']").text();
+    const totalPrice = Number(quantity) * Number(price);
+    rowEle.find("[name='total']").text(totalPrice);
+    updateCartTotal();
+}
+
+const updateCartTotal = () => {
+    const totalEles = document.querySelectorAll("[name='total']");
+    let total = 0;
+    totalEles.forEach((ele) => {
+        total += total + Number(ele.textContent);
+    })
+
+    let el = document.querySelector("[name='sum-total']");
+    if (el) el.textContent = total;
+}
 
 const addCart = (productId) => {
     const totalProductCartEle = document.getElementById("total-product-card");
@@ -244,3 +265,8 @@ const addCart = (productId) => {
     //     })
     //     .catch(error => console.error('Error:', error));
 };
+
+
+(() => {
+    updateCartTotal();
+})();
