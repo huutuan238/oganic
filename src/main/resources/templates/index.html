@@ -40,8 +40,8 @@
             <div class="row">
                 <div class="categories__slider owl-carousel">
                     <div class="col-lg-3"th:each="category: ${categories}">
-                        <div class="categories__item set-bg" data-setbg="img/categories/cat-1.jpg">
-                            <h5><a href="#" th:text="${category.name}"></a></h5>
+                        <div class="categories__item set-bg" th:attr="data-setbg=${category.image}">
+                            <h5><a th:href="@{'./product/search?categoryId=' + ${category.id}}" th:text="${category.name}"></a></h5>
                         </div>
                     </div>
                 </div>
