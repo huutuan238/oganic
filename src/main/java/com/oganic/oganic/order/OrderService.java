@@ -2,11 +2,13 @@ package com.oganic.oganic.order;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.oganic.oganic.product.Product;
 import com.oganic.oganic.product.ProductRepository;
 
 import jakarta.transaction.Transactional;
@@ -36,5 +38,17 @@ public class OrderService {
         order.setOrderDetails(List.of(orderDetail));
 
         return orderRepository.save(order);
+    }
+
+    public List<OrderDetail> getCartItems() {
+        List<Order> orders = orderRepository.findAll();
+        List<OrderDetail> orderDetails = new ArrayList<>();
+        for(Order order: orders) {
+            orderDetails.addAll(order.getOrderDetails());
+            Product product = order.getOrderDetails().get(0).getProduct();
+            System.out.println(123);
+        }
+        
+        return orderDetails;
     }
 }

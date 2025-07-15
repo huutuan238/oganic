@@ -117,20 +117,20 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr th:each=" product : ${cartProducts}" name="cart-product-item">
+                                <tr th:each=" cartItem : ${cartItems}" name="cart-product-item">
                                     <td class="shoping__cart__item">
-                                        <img th:src="@{${product.image}}" alt="">
-                                        <h5 th:text="${product.name}"></h5>
+                                        <img th:src="@{${cartItem.product.image}}" alt="">
+                                        <h5 th:text="${cartItem.product.name}"></h5>
                                     </td>
-                                    <td class="shoping__cart__price" name="price" th:text="${product.price}"></td>
+                                    <td class="shoping__cart__price" name="price" th:text="${cartItem.product.price}"></td>
                                     <td class="shoping__cart__quantity">
                                         <div class="quantity">
                                             <div class="pro-qty">
-                                                <input name="quantity" type="number" min="0" th:value="1">
+                                                <input name="quatity" type="number" min="0" th:value="${cartItem.quatity}">
                                             </div>
                                         </div>
                                     </td>
-                                    <td class="shoping__cart__total" name="total" th:text="${product.price}">
+                                    <td class="shoping__cart__total" name="total" th:text="${cartItem.product.price * cartItem.quatity}">
                                     </td>
                                     <td class="shoping__cart__item__close">
                                         <span class="icon_close"></span>
