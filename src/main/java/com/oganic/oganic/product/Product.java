@@ -1,11 +1,17 @@
 package com.oganic.oganic.product;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
+
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.oganic.oganic.category.Category;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EntityListeners;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -18,14 +24,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+@EntityListeners(AuditingEntityListener.class)
 @Entity
-// @Data
-// @AllArgsConstructor
-// @NoArgsConstructor
+@Data
 public class Product {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	private String name;
@@ -38,17 +43,19 @@ public class Product {
 
 	private Double price;
 
-	private Integer stoke;
+	private Integer stock;
 
 	private String image;
 
 	private Double discount;
 
+	@CreatedDate
 	@Column(name = "created_at")
-	private LocalDateTime createdAt;
+	private Timestamp createdAt;
 
+	@LastModifiedDate
 	@Column(name = "updated_at")
-	private LocalDateTime updatedAt;
+	private Timestamp updatedAt;
 
 	public Long getId() {
 		return id;
@@ -70,7 +77,15 @@ public class Product {
 		this.name = name;
 	}
 
-	public Double getPrice() {
+	public Integer getStock() {
+		return stock;
+	}
+
+	public void setStock(Integer stock) {
+		this.stock = stock;
+	}
+
+		public Double getPrice() {
 		return price;
 	}
 
