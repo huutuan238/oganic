@@ -1,7 +1,5 @@
 <script setup lang="ts">
 import FeatureProduct from './products/FeatureProduct.vue';
-import FooterPage from './FooterPage.vue';
-import PageHeader from './PageHeader.vue';
 import HeroPage from './HeroPage.vue';
 import FromBlog from './blogs/FromBlog.vue';
 
@@ -73,9 +71,6 @@ import FromBlog from './blogs/FromBlog.vue';
         </div>
         <!-- Humberger End -->
 
-        <PageHeader></PageHeader>
-
-        <HeroPage></HeroPage>
 
         <!-- Categories Section Begin -->
         <section class="categories">
@@ -338,7 +333,5 @@ import FromBlog from './blogs/FromBlog.vue';
         </section>
         <!-- Latest Product Section End -->
         <FromBlog></FromBlog>
-
-        <FooterPage></FooterPage>
     </body>
 </template>
