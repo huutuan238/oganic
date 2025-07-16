@@ -47,26 +47,26 @@
         <div class="col-lg-6">
           <nav class="header__menu">
             <ul>
-              <li class="active"><a href="./">Home</a></li>
-              <li><a href="./shop-grid">Shop</a></li>
-              <li><a href="#">Pages</a>
+              <li class="active">
+                <router-link to="/">Home</router-link>
+              </li>
+              <li><router-link to="/shop-grid">Shop</router-link></li>
+              <li><router-link to="/#">pages</router-link>
                 <ul class="header__menu__dropdown">
-                  <li><a href="./shop-details">Shop Details</a></li>
-                  <li><a href="./shoping-cart">Shoping Cart</a></li>
-                  <li><a href="./checkout">Check Out</a></li>
-                  <li><a href="./blog-details">Blog Details</a></li>
+                  <li><router-link to="/shoping-cart">Shoping Cart</router-link></li>
+                  <li><router-link to="/checkout">Check Out</router-link></li>
                 </ul>
               </li>
-              <li><a href="./blog">Blog</a></li>
-              <li><a href="./contact">Contact</a></li>
+              <li><router-link to="/blog">Blog</router-link></li>
+              <li><router-link to="/contact">Contact</router-link></li>
             </ul>
           </nav>
         </div>
         <div class="col-lg-3">
           <div class="header__cart">
             <ul>
-              <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-              <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+              <li><a href="#"><i class="fa fa-heart"></i> <span>{{ totalFavorite }}</span></a></li>
+              <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>{{ totalCartItem }}</span></a></li>
             </ul>
             <div class="header__cart__price">item: <span>$150.00</span></div>
           </div>
@@ -79,3 +79,13 @@
   </header>
   <!-- Header Section End -->
 </template>
+<script>
+export default {
+  data() {
+    return {
+      totalFavorite: 0,
+      totalCartItem: 0
+    }
+  }
+}
+</script>
