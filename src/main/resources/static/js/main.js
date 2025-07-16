@@ -266,6 +266,23 @@ const addCart = (productId) => {
         .catch(error => console.error('Error:', error));
 };
 
+const removeCart = (ele) => {
+    const orderId = ele.getAttribute('data-order-id');
+    fetch(`http://localhost:8080/remove-cart/${orderId}`, {
+        method: 'DELETE', 
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+        .then(response => response.json())
+        .then(data => {
+            ele.closest('tr').remove();
+            console.log(orderId);
+            updateCartTotal();
+        })
+        .catch(error => console.error('Error:', error));
+};
+
 
 (() => {
     updateCartTotal();

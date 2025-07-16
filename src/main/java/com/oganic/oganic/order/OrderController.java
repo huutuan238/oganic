@@ -6,8 +6,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -34,9 +35,15 @@ public class OrderController {
 	}
 
 	@PostMapping("/add-cart")
-	public ResponseEntity<Object> postMethodName(@RequestBody CartRequest cartRequest) {
-		orderService.addCart(cartRequest);
-		return ResponseEntity.status(HttpStatus.OK).body(null);
+	public ResponseEntity<Order> postMethodName(@RequestBody CartRequest cartRequest) {
+		Order order = orderService.addCart(cartRequest);
+		return ResponseEntity.status(HttpStatus.CREATED).body(order);
+	}
+
+	@DeleteMapping("remove-cart/{orderId}")
+	public ResponseEntity<Object> removeCartItem(@PathVariable Long orderId) {
+		orderService.removeCartItem(orderId);
+		return ResponseEntity.status(HttpStatus.OK).body(orderId);
 	}
 	
 }

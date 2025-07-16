@@ -133,7 +133,7 @@
                                     <td class="shoping__cart__total" name="total" th:text="${cartItem.product.price * cartItem.quatity}">
                                     </td>
                                     <td class="shoping__cart__item__close">
-                                        <span class="icon_close"></span>
+                                        <span class="icon_close" th:attr="data-order-id=${cartItem.order.id}" th:onclick="'removeCart(this)'"></span>
                                     </td>
                                 </tr>
                             </tbody>

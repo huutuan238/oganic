@@ -45,10 +45,13 @@ public class OrderService {
         List<OrderDetail> orderDetails = new ArrayList<>();
         for(Order order: orders) {
             orderDetails.addAll(order.getOrderDetails());
-            Product product = order.getOrderDetails().get(0).getProduct();
-            System.out.println(123);
         }
         
         return orderDetails;
+    }
+
+    public String removeCartItem(Long id) {
+        orderRepository.deleteById(id);
+        return "ok";
     }
 }
