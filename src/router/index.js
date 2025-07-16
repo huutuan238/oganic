@@ -12,7 +12,7 @@ import Blog from '@/components/blogs/Blog.vue'
 const routes = [
   { path: '/', component: Home },
   { path: '/shop-grid', component: ListProduct },
-  { path: '/shop-details', component: ProductDetail },
+  { path: '/product/:id', component: ProductDetail,  props: true },
   { path: '/shoping-cart', component: ShoppingCart },
   { path: '/checkout', component: Checkout },
   { path: '/contact', component: Contact },
