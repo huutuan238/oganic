@@ -9,18 +9,8 @@
               <i class="fa fa-bars"></i>
               <span>All departments</span>
             </div>
-            <ul>
-              <li><a href="#">Fresh Meat</a></li>
-              <li><a href="#">Vegetables</a></li>
-              <li><a href="#">Fruit & Nut Gifts</a></li>
-              <li><a href="#">Fresh Berries</a></li>
-              <li><a href="#">Ocean Foods</a></li>
-              <li><a href="#">Butter & Eggs</a></li>
-              <li><a href="#">Fastfood</a></li>
-              <li><a href="#">Fresh Onion</a></li>
-              <li><a href="#">Papayaya & Crisps</a></li>
-              <li><a href="#">Oatmeal</a></li>
-              <li><a href="#">Fresh Bananas</a></li>
+            <ul v-for="category in categories">
+              <li :id="category.id"><a href="#">{{ category.name }}</a></li>
             </ul>
           </div>
         </div>
@@ -60,3 +50,20 @@
   </section>
   <!-- Hero Section End -->
 </template>
+
+<script>
+export default{
+  data() {
+    return {
+      categories: []
+    }
+  },
+  mounted() {
+      fetch('http://localhost:8080/api/categories')
+      .then(response => response.json())
+      .then(data => {
+        this.categories = data;
+      });
+  }
+}
+</script>
