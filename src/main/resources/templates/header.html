@@ -1,7 +1,7 @@
 <html>
 
 <body>
-    <div th:fragment="header">
+    <div th:fragment="header(totalCartItem)">
         <!-- Page Preloder -->
         <div id="preloder">
             <div class="loader"></div>
@@ -130,8 +130,8 @@
                     <div class="col-lg-3">
                         <div class="header__cart">
                             <ul>
-                                <li><a href="./favorite"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                                <li><a href="./cart"><i class="fa fa-shopping-bag"></i> <span id="total-product-card">0</span></a></li>
+                                <li><a th:href="@{'./favorite'}"><i class="fa fa-heart"></i> <span>1</span></a></li>
+                                <li><a th:href="@{'./cart'}"><i class="fa fa-shopping-bag"></i> <span id="total-product-card" th:text="${totalCartItem}"></span></a></li>
                             </ul>
                             <div class="header__cart__price">item: <span>$150.00</span></div>
                         </div>
