@@ -31,6 +31,8 @@ public class OrderController {
 	
 	@GetMapping("/checkout")
 	public String checkout(Model model) {
+		List<OrderDetail> orderDetails = orderService.getCartItems();
+		model.addAttribute("cartItems", orderDetails);
 		return "checkout";
 	}
 

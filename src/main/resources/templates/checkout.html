@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zxx">
+<html lang="zxx" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -192,12 +192,22 @@
                         <div class="col-lg-4 col-md-6">
                             <div class="checkout__order">
                                 <h4>Your Order</h4>
-                                <div class="checkout__order__products">Products <span>Total</span></div>
-                                <ul>
-                                    <li>Vegetable’s Package <span>$75.99</span></li>
-                                    <li>Fresh Vegetable <span>$151.99</span></li>
-                                    <li>Organic Bananas <span>$53.99</span></li>
-                                </ul>
+                                <div class="checkout__order__products row">
+                                    <div class="col-sm-8">
+                                        Products
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <span>Total</span>
+                                    </div>
+                                </div>
+                                <div th:each=" cartItem : ${cartItems}" class="row">
+                                    <div class="col-sm-8">
+                                        <span th:text="${cartItem.product.name}"></span>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <span class="float-right" th:text="${cartItem.quatity * cartItem.product.price}"></span>
+                                    </div>
+                                </div>
                                 <div class="checkout__order__subtotal">Subtotal <span>$750.99</span></div>
                                 <div class="checkout__order__total">Total <span>$750.99</span></div>
                                 <div class="checkout__input__checkbox">
@@ -248,7 +258,7 @@
     <script src="js/owl.carousel.min.js"></script>
     <script src="js/main.js"></script>
 
- 
+
 
 </body>
 
