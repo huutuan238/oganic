@@ -1,6 +1,7 @@
 <script setup>
 import FeatureProduct from './products/FeatureProduct.vue';
 import FromBlog from './blogs/FromBlog.vue';
+import CategorySlide from './CategorySlide.vue';
 
 </script>
 
@@ -75,38 +76,11 @@ import FromBlog from './blogs/FromBlog.vue';
         <section class="categories">
             <div class="container">
                 <div class="row">
-                    <div class="categories__slider owl-carousel">
-                        <div class="col-lg-3">
-                            <div class="categories__item set-bg" data-setbg="img/categories/cat-1.jpg">
-                                <h5><a href="#">Fresh Fruit</a></h5>
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="categories__item set-bg" data-setbg="img/categories/cat-2.jpg">
-                                <h5><a href="#">Dried Fruit</a></h5>
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="categories__item set-bg" data-setbg="img/categories/cat-3.jpg">
-                                <h5><a href="#">Vegetables</a></h5>
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="categories__item set-bg" data-setbg="img/categories/cat-4.jpg">
-                                <h5><a href="#">drink fruits</a></h5>
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="categories__item set-bg" data-setbg="img/categories/cat-5.jpg">
-                                <h5><a href="#">drink fruits</a></h5>
-                            </div>
-                        </div>
-                    </div>
+                    <CategorySlide></CategorySlide>
                 </div>
             </div>
         </section>
         <!-- Categories Section End -->
-
         <FeatureProduct></FeatureProduct>
 
         <!-- Banner Begin -->

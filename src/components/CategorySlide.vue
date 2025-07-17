@@ -1,0 +1,36 @@
+<script setup>
+import 'vue3-carousel/carousel.css'
+import { Carousel, Slide, Navigation } from 'vue3-carousel'
+import { onMounted } from 'vue';
+import axios from 'axios';
+let categories = [];
+onMounted(() => {
+    axios
+        .get('http://localhost:8080/api/categories')
+        .then(response => (categories = response.data))
+})
+const images = Array.from({ length: 5 }, (_, index) => ({
+    id: index + 1,
+    url: `https://picsum.photos/seed/${Math.random()}/800/600`,
+}))
+
+const config = {
+    height: 270,
+    itemsToShow: 4,
+    gap: 5,
+    wrapAround: true,
+    autoplay: 4000,
+    pauseAutoplayOnHover: true,
+}
+</script>
+
+<template>
+    <Carousel v-bind="config">
+        <Slide v-for="category in categories" :key="category.id">
+            <img :src="category.image" alt="image" />
+        </Slide>
+        <template #addons>
+            <Navigation />
+        </template>
+    </Carousel>
+</template>
