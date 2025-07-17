@@ -52,6 +52,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default{
   data() {
     return {
@@ -59,11 +60,9 @@ export default{
     }
   },
   mounted() {
-      fetch('http://localhost:8080/api/categories')
-      .then(response => response.json())
-      .then(data => {
-        this.categories = data;
-      });
+       axios
+            .get('http://localhost:8080/api/categories')
+            .then(response => (this.categories = response.data))
   }
 }
 </script>

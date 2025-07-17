@@ -47,6 +47,7 @@ const favorite = favoriteStore();
     <!-- Featured Section End -->
 </template>
 <script>
+import axios from 'axios';
 export default {
     data() {
         return {
@@ -54,20 +55,18 @@ export default {
         };
     },
     mounted() {
-        fetch('http://localhost:8080/api/products')
-            .then(response => response.json())
-            .then(data => {
-                this.products = data;
-            });
+        axios
+            .get('http://localhost:8080/api/products')
+            .then(response => (this.products = response.data))
     },
     methods: {
-        addCart(){
+        addCart() {
             console.log("Add cart")
         },
-        addFavorite(){
+        addFavorite() {
             console.log("Add favorite")
         },
-        
+
     }
 };
 </script>
