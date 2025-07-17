@@ -5,11 +5,11 @@
       <div class="row">
         <div class="col-lg-3">
           <div class="hero__categories">
-            <div class="hero__categories__all">
+            <div class="hero__categories__all"  @click.prevent="isShow = !isShow">
               <i class="fa fa-bars"></i>
               <span>All departments</span>
             </div>
-            <ul v-for="category in categories">
+            <ul v-for="category in categories" v-show="isShow">
               <li :id="category.id"><a href="#">{{ category.name }}</a></li>
             </ul>
           </div>
@@ -56,7 +56,8 @@ import axios from 'axios';
 export default{
   data() {
     return {
-      categories: []
+      categories: [],
+      isShow: true,
     }
   },
   mounted() {
