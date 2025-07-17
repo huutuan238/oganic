@@ -1,3 +1,8 @@
+<script setup>
+import { favoriteStore } from '@/store/favorite';
+const favorite = favoriteStore();
+</script>
+
 <template>
     <!-- Product Details Section Begin -->
     <section class="product-details spad">
@@ -7,7 +12,7 @@
                     <div class="product__details__pic">
                         <div class="product__details__pic__item">
                             <img class="product__details__pic__item--large"
-                                src="../../assets/product/details/product-details-1.jpg" alt="">
+                                :src="product.image" alt="">
                         </div>
                         <div class="product__details__pic__slider owl-carousel">
                             <img data-imgbigurl="img/product/details/product-details-2.jpg"
@@ -42,7 +47,7 @@
                             </div>
                         </div>
                         <a href="#" class="primary-btn">ADD TO CARD</a>
-                        <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
+                        <a @click="favorite.increment" class="heart-icon"><span class="icon_heart_alt"></span></a>
                         <ul>
                             <li>
                                 <b>Availability</b>
