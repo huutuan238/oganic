@@ -52,18 +52,18 @@ const favorite = favoriteStore();
         <div class="col-lg-6">
           <nav class="header__menu">
             <ul>
-              <li class="active">
+              <li :class="{ active: $route.path === '/' }">
                 <router-link to="/">Home</router-link>
               </li>
-              <li><router-link to="/shop-grid">Shop</router-link></li>
+              <li :class="{ active: $route.path === '/shop-grid' }"><router-link to="/shop-grid">Shop</router-link></li>
               <li><router-link to="/#">pages</router-link>
                 <ul class="header__menu__dropdown">
                   <li><router-link to="/shoping-cart">Shoping Cart</router-link></li>
                   <li><router-link to="/checkout">Check Out</router-link></li>
                 </ul>
               </li>
-              <li><router-link to="/blog">Blog</router-link></li>
-              <li><router-link to="/contact">Contact</router-link></li>
+              <li :class="{ active: $route.path === '/blog' }"><router-link to="/blog">Blog</router-link></li>
+              <li :class="{ active: $route.path === '/contact' }"><router-link to="/contact">Contact</router-link></li>
             </ul>
           </nav>
         </div>
