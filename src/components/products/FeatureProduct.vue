@@ -1,3 +1,7 @@
+<script setup>
+import { favoriteStore } from '@/store/favorite';
+const favorite = favoriteStore();
+</script>
 <template>
     <!-- Featured Section Begin -->
     <section class="featured spad">
@@ -24,9 +28,9 @@
                         <div class="featured__item__pic set-bg" :key="product.id"
                             data-setbg="../../assets/img/featured/feature-1.jpg">
                             <ul class="featured__item__pic__hover">
-                                <li><router-link to="#"><i class="fa fa-heart"></i></router-link></li>
-                                <li><router-link to="#"><i class="fa fa-retweet"></i></router-link></li>
-                                <li><router-link to="#"><i class="fa fa-shopping-cart"></i></router-link></li>
+                                <li><a @click="favorite.increment"><i class="fa fa-heart"></i></a></li>
+                                <li><a @click="console.log('retweet')"><i class="fa fa-retweet"></i></a></li>
+                                <li @click="addCart"><a><i class="fa fa-shopping-cart"></i></a></li>
                             </ul>
                         </div>
                         <div class="featured__item__text">
@@ -55,6 +59,15 @@ export default {
             .then(data => {
                 this.products = data;
             });
+    },
+    methods: {
+        addCart(){
+            console.log("Add cart")
+        },
+        addFavorite(){
+            console.log("Add favorite")
+        },
+        
     }
 };
 </script>

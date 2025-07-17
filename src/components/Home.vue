@@ -1,6 +1,5 @@
-<script setup lang="ts">
+<script setup>
 import FeatureProduct from './products/FeatureProduct.vue';
-import HeroPage from './HeroPage.vue';
 import FromBlog from './blogs/FromBlog.vue';
 
 </script>

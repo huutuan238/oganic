@@ -1,3 +1,8 @@
+<script setup>
+
+import { favoriteStore } from '@/store/favorite';
+const favorite = favoriteStore();
+</script>
 <template>
   <!-- Header Section Begin -->
   <header class="header">
@@ -65,8 +70,8 @@
         <div class="col-lg-3">
           <div class="header__cart">
             <ul>
-              <li><a href="#"><i class="fa fa-heart"></i> <span>{{ totalFavorite }}</span></a></li>
-              <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>{{ totalCartItem }}</span></a></li>
+              <li><a href="#"><i class="fa fa-heart"></i> <span>{{ favorite.count }}</span></a></li>
+              <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>{{ countCartItem }}</span></a></li>
             </ul>
             <div class="header__cart__price">item: <span>$150.00</span></div>
           </div>
@@ -83,8 +88,7 @@
 export default {
   data() {
     return {
-      totalFavorite: 0,
-      totalCartItem: 0
+      countCartItem: 10,
     }
   }
 }

@@ -5,7 +5,7 @@ import PageHeader from './components/PageHeader.vue';
 </script>
 
 <template>
-  <PageHeader></PageHeader>
+  <PageHeader :countCartItem="countCartItem"></PageHeader>
   <HeroPage></HeroPage>
 
   <main>
@@ -13,3 +13,13 @@ import PageHeader from './components/PageHeader.vue';
   </main>
   <FooterPage></FooterPage>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      countCartItem: 10
+    }
+  }
+}
+</script>
