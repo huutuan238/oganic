@@ -93,14 +93,21 @@ public class ProductController {
 	@GetMapping
 	public ResponseEntity<List<Product>> getAllProduct() {
 		List<Product> products = productService.getProducts();
-		return ResponseEntity.status(HttpStatus.CREATED).body(products);
+		return ResponseEntity.status(HttpStatus.OK).body(products);
 	}
 
-	@GetMapping("/product/{id}")
-	public String getProductDetail(@PathVariable Long id, Model model) {
+	@GetMapping("/{id}")
+	public ResponseEntity<Product> getProductDetail(@PathVariable Long id) {
 		Product product = productService.getById(id);
-		model.addAttribute("product", product);
-		return "shop-details";
+		return ResponseEntity.status(HttpStatus.OK).body(product);
+	}
+
+	@GetMapping("/list-products")
+	public ResponseEntity<Page<Product>> getAllProduct(@RequestParam("page") Optional<Integer> page) {
+		Integer pageNumber = page.orElse(1);
+		Page<Product> pageProduct = productService.getProductsPageable(pageNumber - 1, 2);
+
+		return ResponseEntity.status(HttpStatus.OK).body(pageProduct);
 	}
 
 	@GetMapping("/product/search")
