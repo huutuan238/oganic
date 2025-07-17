@@ -1,4 +1,5 @@
 <script setup>
+import ProductItem from './ProductItem.vue';
 import { favoriteStore } from '@/store/favorite';
 const favorite = favoriteStore();
 </script>
@@ -24,22 +25,7 @@ const favorite = favoriteStore();
             </div>
             <div class="row featured__filter">
                 <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat" v-for="product in products">
-                    <div class="featured__item">
-                        <div class="featured__item__pic set-bg" :key="product.id" :style="`background-image: url(${product.image})`"
-                            data-setbg="../../assets/img/featured/feature-1.jpg">
-                            <ul class="featured__item__pic__hover">
-                                <li><a @click="favorite.increment"><i class="fa fa-heart"></i></a></li>
-                                <li><a @click="console.log('retweet')"><i class="fa fa-retweet"></i></a></li>
-                                <li @click="addCart"><a><i class="fa fa-shopping-cart"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="featured__item__text">
-                            <h6>
-                                <router-link :to="`/product/${product.id}`">{{ product.name }}</router-link>
-                            </h6>
-                            <h5>{{ product.price }}</h5>
-                        </div>
-                    </div>
+                    <ProductItem :product="product"></ProductItem>
                 </div>
             </div>
         </div>

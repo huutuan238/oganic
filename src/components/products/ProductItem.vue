@@ -14,7 +14,9 @@ const favorite = favoriteStore();
             </ul>
         </div>
         <div class="product__item__text">
-            <h6><a href="#">{{ product.name }}</a></h6>
+            <h6>
+                <router-link :to="`/product/${product.id}`">{{ product.name }}</router-link>
+            </h6>
             <h5>{{ product.price }}</h5>
         </div>
     </div>
