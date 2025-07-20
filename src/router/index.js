@@ -8,6 +8,7 @@ import ShoppingCart from '@/components/order/ShoppingCart.vue'
 import ProductDetail from '@/components/products/ProductDetail.vue'
 import BlogDetail from '@/components/blogs/BlogDetail.vue'
 import Blog from '@/components/blogs/Blog.vue'
+import SearchProduct from '@/components/products/SearchProduct.vue'
 
 const routes = [
   { path: '/', component: Home },
@@ -18,6 +19,7 @@ const routes = [
   { path: '/contact', component: Contact },
   { path: '/blog', component: Blog },
   { path: '/blog-details', component: BlogDetail },
+  { path: '/products/search', component: SearchProduct },
 ]
 
 const router = createRouter({

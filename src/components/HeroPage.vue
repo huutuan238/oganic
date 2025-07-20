@@ -10,19 +10,19 @@
               <span>All departments</span>
             </div>
             <ul v-for="category in categories" v-show="isShow">
-              <li :id="category.id"><a href="#">{{ category.name }}</a></li>
+              <li :id="category.id"><router-link :to="`/products/search?categoryId=${category.id}`">{{ category.name }}</router-link></li>
             </ul>
           </div>
         </div>
         <div class="col-lg-9">
           <div class="hero__search">
             <div class="hero__search__form">
-              <form action="#">
+              <form :action="`/products/search`">
                 <div class="hero__search__categories">
                   All Categories
                   <span class="arrow_carrot-down"></span>
                 </div>
-                <input type="text" placeholder="What do yo u need?">
+                <input type="text" name="q" :value="this.$route.query.q" placeholder="What do you need?">
                 <button type="submit" class="site-btn">SEARCH</button>
               </form>
             </div>

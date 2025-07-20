@@ -53,7 +53,7 @@ const favorite = favoriteStore();
           <nav class="header__menu">
             <ul>
               <li :class="{ active: $route.path === '/' }">
-                <router-link to="/">Home</router-link>
+                <router-link :to="'/'">Home</router-link>
               </li>
               <li :class="{ active: $route.path === '/shop-grid' }"><router-link to="/shop-grid">Shop</router-link></li>
               <li><router-link to="/#">pages</router-link>
