@@ -9,10 +9,6 @@ onMounted(() => {
         .get('http://localhost:8080/api/categories')
         .then(response => (categories = response.data))
 })
-const images = Array.from({ length: 5 }, (_, index) => ({
-    id: index + 1,
-    url: `https://picsum.photos/seed/${Math.random()}/800/600`,
-}))
 
 const config = {
     height: 270,
