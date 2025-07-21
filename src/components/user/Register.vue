@@ -1,5 +1,20 @@
+<script setup>
+import axios from 'axios';
+
+function register() {
+    console.log('register');
+    const form = document.querySelector('#register-form');
+    const userData = Object.fromEntries(new FormData(form).entries());
+    axios.post('http://localhost:8080/api/users/register', JSON.stringify(userData), {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }).then(res => this.$router.push('/login'))
+}
+
+</script>
 <template>
-        <section class="register">
+    <section class="register">
         <div class="container">
             <div class="checkout__form">
                 <h3 class="text-center mb-3" style="color: #7fad39;">Register</h3>
@@ -22,7 +37,8 @@
                             </div>
                             <div class="checkout__input">
                                 <p>Email<span>*</span></p>
-                                <input type="text" placeholder="oganic@gmail.com" name="email" class="checkout__input__add">
+                                <input type="text" placeholder="oganic@gmail.com" name="email"
+                                    class="checkout__input__add">
                             </div>
                             <div class="checkout__input">
                                 <p>Password<span>*</span></p>
@@ -34,14 +50,15 @@
                             </div>
                             <div class="checkout__input">
                                 <p>Phone<span>*</span></p>
-                                <input type="text" name="phone"  class="checkout__input__add">
+                                <input type="text" name="phone" class="checkout__input__add">
                             </div>
                             <div class="checkout__input">
                                 <p>Address<span>*</span></p>
-                                <input type="text" placeholder="Street Address" name="address" class="checkout__input__add">
+                                <input type="text" placeholder="Street Address" name="address"
+                                    class="checkout__input__add">
                             </div>
                             <div class="register-button mb-3">
-                                <button type="submit" class="site-btn" th:onclick="'register()'">Register</button>
+                                <button type="submit" class="site-btn" @click="register()">Register</button>
                             </div>
                         </div>
                     </div>
