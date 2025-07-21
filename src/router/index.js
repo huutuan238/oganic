@@ -9,6 +9,8 @@ import ProductDetail from '@/components/products/ProductDetail.vue'
 import BlogDetail from '@/components/blogs/BlogDetail.vue'
 import Blog from '@/components/blogs/Blog.vue'
 import SearchProduct from '@/components/products/SearchProduct.vue'
+import Register from '@/components/user/Register.vue'
+import Login from '@/components/user/Login.vue'
 
 const routes = [
   { path: '/', component: Home },
@@ -20,6 +22,8 @@ const routes = [
   { path: '/blog', component: Blog },
   { path: '/blog-details', component: BlogDetail },
   { path: '/products/search', component: SearchProduct },
+  { path: '/login', component: Login },
+  { path: '/register', component: Register },
 ]
 
 const router = createRouter({

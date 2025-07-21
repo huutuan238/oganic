@@ -1,0 +1,52 @@
+<template>
+        <section class="register">
+        <div class="container">
+            <div class="checkout__form">
+                <h3 class="text-center mb-3" style="color: #7fad39;">Register</h3>
+                <form id="register-form">
+                    <div class="row">
+                        <div class="col-lg-8 col-md-6 mx-auto">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="checkout__input">
+                                        <p>Fist Name<span>*</span></p>
+                                        <input type="text" name="firstName">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="checkout__input">
+                                        <p>Last Name<span>*</span></p>
+                                        <input type="text" name="lastName">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="checkout__input">
+                                <p>Email<span>*</span></p>
+                                <input type="text" placeholder="oganic@gmail.com" name="email" class="checkout__input__add">
+                            </div>
+                            <div class="checkout__input">
+                                <p>Password<span>*</span></p>
+                                <input type="password" name="password">
+                            </div>
+                            <div class="checkout__input">
+                                <p>Confirm Password<span>*</span></p>
+                                <input type="password" name="confirm-password">
+                            </div>
+                            <div class="checkout__input">
+                                <p>Phone<span>*</span></p>
+                                <input type="text" name="phone"  class="checkout__input__add">
+                            </div>
+                            <div class="checkout__input">
+                                <p>Address<span>*</span></p>
+                                <input type="text" placeholder="Street Address" name="address" class="checkout__input__add">
+                            </div>
+                            <div class="register-button mb-3">
+                                <button type="submit" class="site-btn" th:onclick="'register()'">Register</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+</template>
