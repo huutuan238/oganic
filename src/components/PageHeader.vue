@@ -35,7 +35,7 @@ const favorite = favoriteStore();
                 </ul>
               </div>
               <div class="header__top__right__auth">
-                <a href="#"><i class="fa fa-user"></i> Login</a>
+                <router-link :to="'/login'"><i class="fa fa-user"></i> Login</router-link>
               </div>
             </div>
           </div>

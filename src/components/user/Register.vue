@@ -1,15 +1,17 @@
 <script setup>
 import axios from 'axios';
+import { useRouter } from 'vue-router';
+const router = useRouter();
 
-function register() {
+const register = async() => {
     console.log('register');
     const form = document.querySelector('#register-form');
     const userData = Object.fromEntries(new FormData(form).entries());
-    axios.post('http://localhost:8080/api/users/register', JSON.stringify(userData), {
+    await axios.post('http://localhost:8080/api/users/register', JSON.stringify(userData), {
         headers: {
             'Content-Type': 'application/json'
         }
-    }).then(res => this.$router.push('/login'))
+    }).then(res => router.push('/login'))
 }
 
 </script>
@@ -18,7 +20,7 @@ function register() {
         <div class="container">
             <div class="checkout__form">
                 <h3 class="text-center mb-3" style="color: #7fad39;">Register</h3>
-                <form id="register-form">
+                <form id="register-form" @submit="register">
                     <div class="row">
                         <div class="col-lg-8 col-md-6 mx-auto">
                             <div class="row">
@@ -58,7 +60,7 @@ function register() {
                                     class="checkout__input__add">
                             </div>
                             <div class="register-button mb-3">
-                                <button type="submit" class="site-btn" @click="register()">Register</button>
+                                <button type="submit" class="site-btn">Register</button>
                             </div>
                         </div>
                     </div>
