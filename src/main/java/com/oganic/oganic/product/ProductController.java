@@ -110,22 +110,19 @@ public class ProductController {
 		return ResponseEntity.status(HttpStatus.OK).body(pageProduct);
 	}
 
-	@GetMapping("/product/search")
-	public String searchProducts(
-							@RequestParam(defaultValue = "1") Integer page,
-                           @RequestParam(defaultValue = "2") Integer size,
-                           @RequestParam(required = false) Integer categoryId,
-                           @RequestParam(required = false) String q,
-			Model model) {
+	@GetMapping("/latest-products")
+	public ResponseEntity<List<Product>> getLatestProducts() {
+		List<Product> latestProducts = productService.getLatestProducts();
+		return ResponseEntity.status(HttpStatus.OK).body(latestProducts);
+	}
+
+	@GetMapping("/search")
+	public ResponseEntity<Page<Product>> searchProducts(
+			@RequestParam(defaultValue = "1") Integer page,
+			@RequestParam(defaultValue = "4") Integer size,
+			@RequestParam(required = false) Integer categoryId,
+			@RequestParam(required = false) String q) {
 		Page<Product> pageProduct = productService.search(page - 1, size, categoryId, q);
-
-		List<Category> categories = categoryService.getCategories();
-		model.addAttribute("categories", categories);
-
-		model.addAttribute("products", pageProduct.getContent());
-		model.addAttribute("productTotals", pageProduct.getTotalElements());
-		model.addAttribute("totalPage", pageProduct.getTotalPages());
-		model.addAttribute("currentPage", page);
-		return "products";
+		return ResponseEntity.status(HttpStatus.OK).body(pageProduct);
 	}
 }
