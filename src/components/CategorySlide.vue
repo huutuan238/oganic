@@ -4,8 +4,8 @@ import { Carousel, Slide, Navigation } from 'vue3-carousel'
 import { onMounted } from 'vue';
 import axios from 'axios';
 let categories = [];
-onMounted(() => {
-    axios
+onMounted(async() => {
+    await axios
         .get('http://localhost:8080/api/categories')
         .then(response => (categories = response.data))
 })

@@ -5,12 +5,13 @@
       <div class="row">
         <div class="col-lg-3">
           <div class="hero__categories">
-            <div class="hero__categories__all"  @click.prevent="isShow = !isShow">
+            <div class="hero__categories__all" @click.prevent="props.isShow = !props.isShow">
               <i class="fa fa-bars"></i>
               <span>All departments</span>
             </div>
-            <ul v-for="category in categories" v-show="isShow">
-              <li :id="category.id"><router-link :to="`/products/search?categoryId=${category.id}`">{{ category.name }}</router-link></li>
+            <ul v-for="category in categories" v-show="props.isShow">
+              <li :id="category.id"><router-link :to="`/products/search?categoryId=${category.id}`">{{ category.name
+                  }}</router-link></li>
             </ul>
           </div>
         </div>
@@ -36,7 +37,7 @@
               </div>
             </div>
           </div>
-          <div class="hero__item set-bg" data-setbg="img/hero/banner.jpg">
+          <div class="hero__item set-bg" data-setbg="img/hero/banner.jpg" v-show="isShow">
             <div class="hero__text">
               <span>FRUIT FRESH</span>
               <h2>Vegetable <br />100% Organic</h2>
@@ -51,19 +52,22 @@
   <!-- Hero Section End -->
 </template>
 
-<script>
+<script setup>
 import axios from 'axios';
-export default{
-  data() {
-    return {
-      categories: [],
-      isShow: true,
-    }
-  },
-  mounted() {
-       axios
-            .get('http://localhost:8080/api/categories')
-            .then(response => (this.categories = response.data))
+import { onMounted, ref } from 'vue';
+
+const props = defineProps({
+  isShow: {
+    type: Boolean,
+    required: false,
+    default: false
   }
-}
+})
+
+const categories = ref([]);
+onMounted(async () => {
+  await axios
+    .get('http://localhost:8080/api/categories')
+    .then(response => (categories.value = response.data))
+})
 </script>

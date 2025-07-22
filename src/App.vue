@@ -6,7 +6,7 @@ import PageHeader from './components/PageHeader.vue';
 
 <template>
   <PageHeader :countCartItem="countCartItem"></PageHeader>
-  <HeroPage></HeroPage>
+  <HeroPage :isShow="false"></HeroPage>
 
   <main>
     <router-view></router-view>
