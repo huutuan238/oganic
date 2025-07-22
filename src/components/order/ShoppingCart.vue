@@ -28,7 +28,9 @@
                                     <td class="shoping__cart__quantity">
                                         <div class="quantity">
                                             <div class="pro-qty">
+                                                <span class="dec qtybtn" @click="decreaseQuantity(order.id)">-</span>
                                                 <input type="text" :value="order.quatity">
+                                                <span class="inc qtybtn" @click="increaseQuantity(order.id)">+</span>
                                             </div>
                                         </div>
                                     </td>
@@ -36,7 +38,7 @@
                                         ${{ order.quatity * order.product.price }}
                                     </td>
                                     <td class="shoping__cart__item__close">
-                                        <span class="icon_close"></span>
+                                        <span class="icon_close" @click="removeCart(order.id)"></span>
                                     </td>
                                 </tr>
                             </tbody>
@@ -67,10 +69,10 @@
                     <div class="shoping__checkout">
                         <h5>Cart Total</h5>
                         <ul>
-                            <li>Subtotal <span>$454.98</span></li>
-                            <li>Total <span>{{  total }}</span></li>
+                            <li>Subtotal <span>${{ total }}</span></li>
+                            <li>Total <span>${{  total }}</span></li>
                         </ul>
-                        <a href="#" class="primary-btn">PROCEED TO CHECKOUT</a>
+                        <router-link :to="'/checkout'" class="primary-btn">PROCEED TO CHECKOUT</router-link>
                     </div>
                 </div>
             </div>
@@ -82,13 +84,36 @@
 <script setup>
 import axios from 'axios';
 import Breadcrumb from '../Breadcrumb.vue';
-import { onMounted, ref } from 'vue';
-const orders = ref([])
+import { computed, onMounted, ref } from 'vue';
+let orders = ref([])
 
 onMounted(async() => {
             await axios
             .get('http://localhost:8080/api/orders')
             .then(response => (orders.value = response.data))
 })
-const total = 100;
+
+function removeCart(orderId) {
+    orders.value = orders.value.find(o => o.id !== orderId);
+    axios.delete(`http://localhost:8080/api/orders/remove-cart/${orderId}`)
+    .then(res => console("remove cart"))
+    .catch(error => console.log("remove cart error"))
+ }
+
+function increaseQuantity(orderId) {
+    const order = orders.value.find(o => o.id === orderId);
+    order.quatity ++;
+}
+
+function decreaseQuantity(orderId) {
+    const order = orders.value.find(o => o.id === orderId);
+    order.quatity --;
+}
+
+const total = computed(() => {
+  return orders.value.reduce((sum, order) => {
+    return sum + Number(order.product.price) * Number(order.quatity);
+  }, 0);
+});
+
 </script>

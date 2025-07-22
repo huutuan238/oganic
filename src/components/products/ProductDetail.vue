@@ -4,7 +4,9 @@ import axios from 'axios';
 import { onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import Breadcrumb from '../Breadcrumb.vue';
+import { cartStore } from '@/store/cart';
 const favorite = favoriteStore();
+const cart = cartStore();
 const product = ref([]);
 
 const route = useRoute()
@@ -57,11 +59,13 @@ onMounted(async() => {
                         <div class="product__details__quantity">
                             <div class="quantity">
                                 <div class="pro-qty">
+                                    <span class="dec qtybtn">-</span>
                                     <input type="text" value="1">
+                                    <span class="inc qtybtn">+</span>
                                 </div>
                             </div>
                         </div>
-                        <a href="#" class="primary-btn">ADD TO CARD</a>
+                        <a @click="cart.addCart(product.id)" class="primary-btn">ADD TO CARD</a>
                         <a @click="favorite.increment" class="heart-icon"><span class="icon_heart_alt"></span></a>
                         <ul>
                             <li>
@@ -167,20 +171,3 @@ onMounted(async() => {
     </section>
     <!-- Product Details Section End -->
 </template>
-<!-- <script>
-export default {
-  data() {
-    return {
-      product: []
-    };
-  },
-  mounted() {
-    const productId = this.$route.params.id;
-    fetch(`http://localhost:8080/api/products/${productId}`)
-      .then(response => response.json())
-      .then(data => {
-        this.product = data;
-      });
-  }
-};
-</script> -->
