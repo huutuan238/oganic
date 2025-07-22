@@ -27,6 +27,8 @@ import lombok.Setter;
 @EntityListeners(AuditingEntityListener.class)
 @Entity
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Product {
 
 	@Id
