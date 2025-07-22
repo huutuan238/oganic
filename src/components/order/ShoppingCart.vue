@@ -1,4 +1,5 @@
 <template>
+    <Breadcrumb :title="`Shopping Cart`"></Breadcrumb>
     <!-- Shoping Cart Section Begin -->
     <section class="shoping-cart spad">
         <div class="container">
@@ -78,29 +79,16 @@
     <!-- Shoping Cart Section End -->
 </template>
 
-<script>
+<script setup>
 import axios from 'axios';
 import Breadcrumb from '../Breadcrumb.vue';
+import { onMounted, ref } from 'vue';
+const orders = ref([])
 
-export default{
-    data() {
-        return {
-            orders: [],
-        }
-    },
-    mounted() {
-        axios
+onMounted(async() => {
+            await axios
             .get('http://localhost:8080/api/orders')
-            .then(response => (this.orders = response.data))
-        
-    },
-    methods: {
-
-    }, 
-    computed: {
-        total() {
-            return 100;
-        }
-    }
-}
+            .then(response => (orders.value = response.data))
+})
+const total = 100;
 </script>

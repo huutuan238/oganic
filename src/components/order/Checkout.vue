@@ -4,7 +4,7 @@ import Breadcrumb from '../Breadcrumb.vue';
 </script>
 
 <template>
-    <Breadcrumb :title="Checkout"></Breadcrumb>
+    <Breadcrumb :title="`Checkout`"></Breadcrumb>
     <!-- Checkout Section Begin -->
     <section class="checkout spad">
         <div class="container">
