@@ -88,7 +88,7 @@ public class OrderController {
 		return ResponseEntity.status(HttpStatus.CREATED).body(order);
 	}
 
-	@DeleteMapping("remove-cart/{orderId}")
+	@DeleteMapping("/remove-cart/{orderId}")
 	public ResponseEntity<Object> removeCartItem(@PathVariable Long orderId) {
 		orderService.removeCartItem(orderId);
 		return ResponseEntity.status(HttpStatus.OK).body(orderId);

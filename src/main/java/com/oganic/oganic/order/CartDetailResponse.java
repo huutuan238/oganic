@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class CartDetailResponse {
     private Long id;
+    private Long orderId;
     private ProductResponse product;
     private Integer quatity;
 }
