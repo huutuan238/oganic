@@ -6,11 +6,11 @@ export const cartStore = defineStore('cart', {
         count: 0
     }),
     actions: {
-        addCart(productId) {
+        addCart(productId, quatity) {
             const data = {
                 userId: 1,
                 productId: productId,
-                quatity: 1,
+                quatity: quatity || 1,
             }
             axios.post('http://localhost:8080/api/orders/add-cart', JSON.stringify(data), {
                 headers: {

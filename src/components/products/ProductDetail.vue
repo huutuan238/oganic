@@ -8,6 +8,10 @@ import { cartStore } from '@/store/cart';
 const favorite = favoriteStore();
 const cart = cartStore();
 const product = ref([]);
+const quatity = ref(10);
+function increaseQuantity() {
+    quatity.value ++;
+}
 
 const route = useRoute()
 onMounted(async() => {
@@ -60,12 +64,12 @@ onMounted(async() => {
                             <div class="quantity">
                                 <div class="pro-qty">
                                     <span class="dec qtybtn">-</span>
-                                    <input type="text" value="1">
-                                    <span class="inc qtybtn">+</span>
+                                    <input type="text" :value="quatity">
+                                    <span class="inc qtybtn" @click="increaseQuantity()">+</span>
                                 </div>
                             </div>
                         </div>
-                        <a @click="cart.addCart(product.id)" class="primary-btn">ADD TO CARD</a>
+                        <a @click="cart.addCart(product.id, quatity)" class="primary-btn">ADD TO CARD</a>
                         <a @click="favorite.increment" class="heart-icon"><span class="icon_heart_alt"></span></a>
                         <ul>
                             <li>

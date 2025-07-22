@@ -1,7 +1,31 @@
 <script setup>
+import { computed, onMounted, ref } from 'vue';
 import ProductItem from './ProductItem.vue';
 import { favoriteStore } from '@/store/favorite';
+import axios from 'axios';
 const favorite = favoriteStore();
+const products = ref([])
+onMounted(() => {
+    axios
+        .get('http://localhost:8080/api/products')
+        .then(response => (products.value = response.data))
+})
+const categories = computed(() => {
+  const set = new Set();
+  set.add('All')
+  products.value.forEach(product => {
+    if (product.category?.name) {
+      set.add(product.category.name)
+    }
+  })
+  return Array.from(set)
+})
+const selectedCategory = ref('All')
+const filteredProducts = computed(() => {
+  return selectedCategory.value === 'All'
+    ? products.value
+    : products.value.filter(p => p.category.name === selectedCategory.value)
+})
 </script>
 <template>
     <!-- Featured Section Begin -->
@@ -14,17 +38,13 @@ const favorite = favoriteStore();
                     </div>
                     <div class="featured__controls">
                         <ul>
-                            <li class="active" data-filter="*">All</li>
-                            <li data-filter=".oranges">Oranges</li>
-                            <li data-filter=".fresh-meat">Fresh Meat</li>
-                            <li data-filter=".vegetables">Vegetables</li>
-                            <li data-filter=".fastfood">Fastfood</li>
+                            <li data-filter=".oranges" v-for="category in categories" :class="{ 'active': selectedCategory === category }"  @click="selectedCategory = category">{{ category }}</li>
                         </ul>
                     </div>
                 </div>
             </div>
             <div class="row featured__filter">
-                <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat" v-for="product in products">
+                <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat" v-for="product in filteredProducts">
                     <ProductItem :product="product"></ProductItem>
                 </div>
             </div>
@@ -32,27 +52,3 @@ const favorite = favoriteStore();
     </section>
     <!-- Featured Section End -->
 </template>
-<script>
-import axios from 'axios';
-export default {
-    data() {
-        return {
-            products: []
-        };
-    },
-    mounted() {
-        axios
-            .get('http://localhost:8080/api/products')
-            .then(response => (this.products = response.data))
-    },
-    methods: {
-        addCart() {
-            console.log("Add cart")
-        },
-        addFavorite() {
-            console.log("Add favorite")
-        },
-
-    }
-};
-</script>

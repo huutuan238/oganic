@@ -48,7 +48,7 @@ const cart = cartStore()
       <div class="row">
         <div class="col-lg-3">
           <div class="header__logo">
-            <a href="./"><img src="../assets/img/logo.png" alt=""></a>
+            <router-link :to="'/'"><img src="../assets/img/logo.png" alt=""></router-link>
           </div>
         </div>
         <div class="col-lg-6">
