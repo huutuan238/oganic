@@ -1,9 +1,24 @@
 <script setup>
 import { favoriteStore } from '@/store/favorite';
+import axios from 'axios';
+import { onMounted, ref } from 'vue';
+import { useRoute } from 'vue-router';
+import Breadcrumb from '../Breadcrumb.vue';
 const favorite = favoriteStore();
+const product = ref([]);
+
+const route = useRoute()
+onMounted(async() => {
+    const productId = route.params.id;
+    await axios.get(`http://localhost:8080/api/products/${productId}`)
+    .then(res => {
+        product.value = res.data;
+    })
+})
 </script>
 
 <template>
+    <Breadcrumb :title="product.name"></Breadcrumb>
     <!-- Product Details Section Begin -->
     <section class="product-details spad">
         <div class="container">
@@ -152,7 +167,7 @@ const favorite = favoriteStore();
     </section>
     <!-- Product Details Section End -->
 </template>
-<script>
+<!-- <script>
 export default {
   data() {
     return {
@@ -168,4 +183,4 @@ export default {
       });
   }
 };
-</script>
+</script> -->
