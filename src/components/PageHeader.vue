@@ -1,7 +1,9 @@
 <script setup>
 
+import { cartStore } from '@/store/cart';
 import { favoriteStore } from '@/store/favorite';
 const favorite = favoriteStore();
+const cart = cartStore()
 </script>
 <template>
   <!-- Header Section Begin -->
@@ -71,7 +73,7 @@ const favorite = favoriteStore();
           <div class="header__cart">
             <ul>
               <li><a href="#"><i class="fa fa-heart"></i> <span>{{ favorite.count }}</span></a></li>
-              <li><router-link :to="`/shopping-cart`"><i class="fa fa-shopping-bag"></i> <span>{{ countCartItem }}</span></router-link></li>
+              <li><router-link :to="`/shoping-cart`"><i class="fa fa-shopping-bag"></i> <span>{{ cart.count }}</span></router-link></li>
             </ul>
             <div class="header__cart__price">item: <span>$150.00</span></div>
           </div>
@@ -84,12 +86,3 @@ const favorite = favoriteStore();
   </header>
   <!-- Header Section End -->
 </template>
-<script>
-export default {
-  data() {
-    return {
-      countCartItem: 10,
-    }
-  }
-}
-</script>

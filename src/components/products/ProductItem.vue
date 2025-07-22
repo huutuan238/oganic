@@ -1,7 +1,9 @@
 <script setup>
 defineProps(['product'])
+import { cartStore } from '@/store/cart';
 import { favoriteStore } from '@/store/favorite';
 const favorite = favoriteStore();
+const cart = cartStore();
 </script>
 <template>
     <div class="product__item">
@@ -10,7 +12,7 @@ const favorite = favoriteStore();
             <ul class="product__item__pic__hover">
                 <li><a @click="favorite.increment"><i class="fa fa-heart"></i></a></li>
                 <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                <li><a @click="cart.addCart(product.id)"><i class="fa fa-shopping-cart"></i></a></li>
             </ul>
         </div>
         <div class="product__item__text">
