@@ -1,5 +1,19 @@
 <script setup lang="js">
 import Breadcrumb from '../Breadcrumb.vue';
+import axios from 'axios';
+import { computed, onMounted, ref } from 'vue';
+let orders = ref([])
+
+onMounted(async () => {
+    await axios
+        .get('http://localhost:8080/api/orders')
+        .then(response => (orders.value = response.data))
+})
+const total = computed(() => {
+  return orders.value.reduce((sum, order) => {
+    return sum + Number(order.product.price) * Number(order.quatity);
+  }, 0);
+});
 
 </script>
 
@@ -99,12 +113,10 @@ import Breadcrumb from '../Breadcrumb.vue';
                                 <h4>Your Order</h4>
                                 <div class="checkout__order__products">Products <span>Total</span></div>
                                 <ul>
-                                    <li>Vegetable’s Package <span>$75.99</span></li>
-                                    <li>Fresh Vegetable <span>$151.99</span></li>
-                                    <li>Organic Bananas <span>$53.99</span></li>
+                                    <li v-for="order in orders">{{ order.product.name }}<span>${{ order.quatity * order.product.price }}</span></li>
                                 </ul>
-                                <div class="checkout__order__subtotal">Subtotal <span>$750.99</span></div>
-                                <div class="checkout__order__total">Total <span>$750.99</span></div>
+                                <div class="checkout__order__subtotal">Subtotal <span>${{ total }}</span></div>
+                                <div class="checkout__order__total">Total <span>${{ total }}</span></div>
                                 <div class="checkout__input__checkbox">
                                     <label for="acc-or">
                                         Create an account?
