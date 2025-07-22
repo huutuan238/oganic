@@ -1,6 +1,7 @@
 <script setup>
 import axios from 'axios';
 import { useRouter } from 'vue-router';
+import Breadcrumb from '../Breadcrumb.vue';
 const router = useRouter()
 
 const login = async (e) => {
@@ -17,6 +18,7 @@ const login = async (e) => {
 }
 </script>
 <template>
+    <Breadcrumb :title="`Login`"></Breadcrumb>
     <h3 class="text-center" style="color: #7fad39;">
         Login
     </h3>

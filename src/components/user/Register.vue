@@ -1,6 +1,7 @@
 <script setup>
 import axios from 'axios';
 import { useRouter } from 'vue-router';
+import Breadcrumb from '../Breadcrumb.vue';
 const router = useRouter();
 
 const register = async() => {
@@ -16,6 +17,7 @@ const register = async() => {
 
 </script>
 <template>
+    <Breadcrumb :title="`Register`"></Breadcrumb>
     <section class="register">
         <div class="container">
             <div class="checkout__form">

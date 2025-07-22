@@ -1,10 +1,12 @@
 <script setup>
 import axios from 'axios';
 import ProductItem from './ProductItem.vue';
+import Breadcrumb from '../Breadcrumb.vue';
 
 </script>
 
 <template>
+    <Breadcrumb :title="`Shop`"></Breadcrumb>
     <!-- Product Section Begin -->
     <section class="product spad">
         <div class="container">

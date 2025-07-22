@@ -1,4 +1,9 @@
+<script setup lang="js">
+import Breadcrumb from '../Breadcrumb.vue';
+
+</script>
 <template>
+    <Breadcrumb :title="`Blog`"></Breadcrumb>
     <!-- Blog Section Begin -->
     <section class="blog spad">
         <div class="container">

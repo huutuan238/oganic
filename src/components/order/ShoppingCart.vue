@@ -80,6 +80,7 @@
 
 <script>
 import axios from 'axios';
+import Breadcrumb from '../Breadcrumb.vue';
 
 export default{
     data() {

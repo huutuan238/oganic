@@ -1,4 +1,10 @@
+<script setup>
+import Breadcrumb from '../Breadcrumb.vue';
+
+</script>
+
 <template>
+    <Breadcrumb :title="`Contact`"></Breadcrumb>
     <!-- Contact Section Begin -->
     <section class="contact spad">
         <div class="container">

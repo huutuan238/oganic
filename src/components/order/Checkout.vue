@@ -1,5 +1,11 @@
+<script setup lang="js">
+import Breadcrumb from '../Breadcrumb.vue';
+
+</script>
+
 <template>
-        <!-- Checkout Section Begin -->
+    <Breadcrumb :title="Checkout"></Breadcrumb>
+    <!-- Checkout Section Begin -->
     <section class="checkout spad">
         <div class="container">
             <div class="row">
