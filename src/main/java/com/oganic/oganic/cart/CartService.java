@@ -23,8 +23,8 @@ public class CartService {
         this.userRepository = userRepository;
     }
 
-    public List<Cart> getCarts() {
-        return cartReponsitory.findAll();
+    public List<Cart> getCarts(User user) {
+        return cartReponsitory.findByUser(user);
     }
 
     public Cart addCart(CartRequest cartRequest) {
