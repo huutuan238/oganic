@@ -19,7 +19,7 @@ const cart = cartStore();
             <h6>
                 <router-link :to="`/product/${product.id}`">{{ product.name }}</router-link>
             </h6>
-            <h5>{{ product.price }}</h5>
+            <h5>${{ product.price }}</h5>
         </div>
     </div>
 </template>

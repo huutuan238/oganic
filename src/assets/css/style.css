@@ -1282,6 +1282,7 @@ ol {
 
 .product__discount__item__pic {
 	height: 270px;
+	width: 270px;
 	position: relative;
 	overflow: hidden;
 }
