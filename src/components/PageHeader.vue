@@ -75,7 +75,7 @@ const cart = cartStore()
               <li><a href="#"><i class="fa fa-heart"></i> <span>{{ favorite.count }}</span></a></li>
               <li><router-link :to="`/shoping-cart`"><i class="fa fa-shopping-bag"></i> <span>{{ cart.count }}</span></router-link></li>
             </ul>
-            <div class="header__cart__price">item: <span>$150.00</span></div>
+            <div class="header__cart__price">item: <span>${{ cart.total }}</span></div>
           </div>
         </div>
       </div>

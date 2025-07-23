@@ -3,7 +3,7 @@
         <template v-for="(group, index) in productGroups" :key="index">
             <Slide>
                 <div class="latest-prdouct__slider__item">
-                    <router-link v-for="(product, idx) in group" :key="idx" href="#" class="latest-product__item" :to="`./product/${product.id}`">
+                    <router-link v-for="(product, idx) in group" :key="idx" class="latest-product__item" :to="`./product/${product.id}`">
                         <div class="latest-product__item__pic">
                             <img :src="product.image" alt="" />
                         </div>

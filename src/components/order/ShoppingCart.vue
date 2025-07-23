@@ -29,7 +29,7 @@
                                         <div class="quantity">
                                             <div class="pro-qty">
                                                 <span class="dec qtybtn" @click="decreaseQuantity(order.id)">-</span>
-                                                <input type="text" :value="order.quatity">
+                                                <input type="number" v-model.number="order.quatity" min="1">
                                                 <span class="inc qtybtn" @click="increaseQuantity(order.id)">+</span>
                                             </div>
                                         </div>

@@ -1,11 +1,19 @@
 <script setup>
+import { onMounted } from 'vue';
 import FooterPage from './components/FooterPage.vue';
 import HeroPage from './components/HeroPage.vue';
 import PageHeader from './components/PageHeader.vue';
+import { cartStore } from './store/cart';
+
+const cart = cartStore();
+
+onMounted(() => {
+  cart.fetchCart();
+})
 </script>
 
 <template>
-  <PageHeader :countCartItem="countCartItem"></PageHeader>
+  <PageHeader></PageHeader>
   <HeroPage :isShow="false"></HeroPage>
 
   <main>
@@ -14,12 +22,3 @@ import PageHeader from './components/PageHeader.vue';
   <FooterPage></FooterPage>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      countCartItem: 10
-    }
-  }
-}
-</script>
