@@ -12,7 +12,7 @@ export const cartStore = defineStore('cart', {
                 productId: productId,
                 quatity: quatity || 1,
             }
-            axios.post('http://localhost:8080/api/orders/add-cart', JSON.stringify(data), {
+            axios.post('http://localhost:8080/api/carts/add', JSON.stringify(data), {
                 headers: {
                     'Content-Type': 'application/json'
                 }

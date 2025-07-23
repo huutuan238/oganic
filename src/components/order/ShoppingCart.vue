@@ -89,7 +89,7 @@ let orders = ref([])
 
 onMounted(async() => {
             await axios
-            .get('http://localhost:8080/api/orders')
+            .get('http://localhost:8080/api/carts')
             .then(response => (orders.value = response.data))
 })
 

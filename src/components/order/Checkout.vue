@@ -6,14 +6,25 @@ let orders = ref([])
 
 onMounted(async () => {
     await axios
-        .get('http://localhost:8080/api/orders')
+        .get('http://localhost:8080/api/carts')
         .then(response => (orders.value = response.data))
 })
 const total = computed(() => {
-  return orders.value.reduce((sum, order) => {
-    return sum + Number(order.product.price) * Number(order.quatity);
-  }, 0);
+    return orders.value.reduce((sum, order) => {
+        return sum + Number(order.product.price) * Number(order.quatity);
+    }, 0);
 });
+
+function checkout() {
+    const ordersData = {userId: 1}
+    axios.post('http://localhost:8080/api/orders/checkout', JSON.stringify(ordersData), {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }).then(res => {
+        router.push('/')
+    })
+}
 
 </script>
 
@@ -30,7 +41,7 @@ const total = computed(() => {
             </div>
             <div class="checkout__form">
                 <h4>Billing Details</h4>
-                <form action="#">
+                <form @submit="checkout()">
                     <div class="row">
                         <div class="col-lg-8 col-md-6">
                             <div class="row">
@@ -113,7 +124,10 @@ const total = computed(() => {
                                 <h4>Your Order</h4>
                                 <div class="checkout__order__products">Products <span>Total</span></div>
                                 <ul>
-                                    <li v-for="order in orders">{{ order.product.name }}<span>${{ order.quatity * order.product.price }}</span></li>
+                                    <li v-for="order in orders" :id="order.id">
+                                        {{ order.product.name }}
+                                        <span>${{ order.quatity * order.product.price }}</span>
+                                    </li>
                                 </ul>
                                 <div class="checkout__order__subtotal">Subtotal <span>${{ total }}</span></div>
                                 <div class="checkout__order__total">Total <span>${{ total }}</span></div>
