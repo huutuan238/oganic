@@ -1,4 +1,4 @@
-package com.oganic.oganic.order;
+package com.oganic.oganic.cart;
 
 import lombok.Getter;
 import lombok.Setter;
