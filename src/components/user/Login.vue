@@ -13,6 +13,9 @@ const login = async (e) => {
             'Content-Type': 'application/json'
         }
     }).then(res => {
+        localStorage.setItem('token', res.data.token);
+        localStorage.setItem('userId', res.data.id);
+        localStorage.setItem('email', res.data.email);
         router.push('/')
     })
 }

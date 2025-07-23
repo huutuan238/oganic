@@ -70,7 +70,7 @@
                         <h5>Cart Total</h5>
                         <ul>
                             <li>Subtotal <span>${{ total }}</span></li>
-                            <li>Total <span>${{  total }}</span></li>
+                            <li>Total <span>${{ total }}</span></li>
                         </ul>
                         <router-link :to="'/checkout'" class="primary-btn">PROCEED TO CHECKOUT</router-link>
                     </div>
@@ -86,34 +86,39 @@ import axios from 'axios';
 import Breadcrumb from '../Breadcrumb.vue';
 import { computed, onMounted, ref } from 'vue';
 let orders = ref([])
+const token = localStorage.getItem('token');
 
-onMounted(async() => {
-            await axios
-            .get('http://localhost:8080/api/carts')
-            .then(response => (orders.value = response.data))
+onMounted(async () => {
+    await axios
+        .get('http://localhost:8080/api/carts', {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+        .then(response => (orders.value = response.data))
 })
 
 function removeCart(orderId) {
     orders.value = orders.value.find(o => o.id !== orderId);
     axios.delete(`http://localhost:8080/api/orders/remove-cart/${orderId}`)
-    .then(res => console("remove cart"))
-    .catch(error => console.log("remove cart error"))
- }
+        .then(res => console("remove cart"))
+        .catch(error => console.log("remove cart error"))
+}
 
 function increaseQuantity(orderId) {
     const order = orders.value.find(o => o.id === orderId);
-    order.quatity ++;
+    order.quatity++;
 }
 
 function decreaseQuantity(orderId) {
     const order = orders.value.find(o => o.id === orderId);
-    order.quatity --;
+    order.quatity--;
 }
 
 const total = computed(() => {
-  return orders.value.reduce((sum, order) => {
-    return sum + Number(order.product.price) * Number(order.quatity);
-  }, 0);
+    return orders.value.reduce((sum, order) => {
+        return sum + Number(order.product.price) * Number(order.quatity);
+    }, 0);
 });
 
 </script>

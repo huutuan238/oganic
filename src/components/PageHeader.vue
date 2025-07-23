@@ -1,9 +1,17 @@
 <script setup>
-
 import { cartStore } from '@/store/cart';
 import { favoriteStore } from '@/store/favorite';
+import { useRouter } from 'vue-router';
 const favorite = favoriteStore();
-const cart = cartStore()
+const cart = cartStore();
+let email = localStorage.getItem('email') || '';
+const router = useRouter()
+function logout() {
+  localStorage.removeItem('token');
+  localStorage.removeItem('email');
+  localStorage.removeItem('userId');
+  router.push('/login')
+}
 </script>
 <template>
   <!-- Header Section Begin -->
@@ -36,8 +44,11 @@ const cart = cartStore()
                   <li><a href="#">English</a></li>
                 </ul>
               </div>
-              <div class="header__top__right__auth">
+              <div class="header__top__right__auth" v-if="email.length < 1">
                 <router-link :to="'/login'"><i class="fa fa-user"></i> Login</router-link>
+              </div>
+              <div class="header__top__right__auth" v-else>
+                <a @click="logout()"><i class="fa fa-sign-out"></i>Logout</a>
               </div>
             </div>
           </div>
@@ -73,7 +84,8 @@ const cart = cartStore()
           <div class="header__cart">
             <ul>
               <li><a href="#"><i class="fa fa-heart"></i> <span>{{ favorite.count }}</span></a></li>
-              <li><router-link :to="`/shoping-cart`"><i class="fa fa-shopping-bag"></i> <span>{{ cart.count }}</span></router-link></li>
+              <li><router-link :to="`/shoping-cart`"><i class="fa fa-shopping-bag"></i> <span>{{ cart.count
+                    }}</span></router-link></li>
             </ul>
             <div class="header__cart__price">item: <span>${{ cart.total }}</span></div>
           </div>

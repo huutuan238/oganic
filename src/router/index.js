@@ -16,8 +16,8 @@ const routes = [
   { path: '/', component: Home },
   { path: '/shop-grid', component: ListProduct },
   { path: '/product/:id', component: ProductDetail,  props: true },
-  { path: '/shoping-cart', component: ShoppingCart },
-  { path: '/checkout', component: Checkout },
+  { path: '/shoping-cart', component: ShoppingCart, meta: { requiresAuth: true } },
+  { path: '/checkout', component: Checkout, meta: { requiresAuth: true }  },
   { path: '/contact', component: Contact },
   { path: '/blog', component: Blog },
   { path: '/blog-details', component: BlogDetail },
@@ -29,6 +29,15 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(),
   routes,
+})
+
+router.beforeEach((to, from, next) => {
+  const token = localStorage.getItem('token')
+  if (to.meta.requiresAuth && !token) {
+    next({ path: '/login' }) // redirect to login if not authenticated
+  } else {
+    next()
+  }
 })
 
 export default router
