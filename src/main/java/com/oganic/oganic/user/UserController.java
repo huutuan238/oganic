@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.oganic.oganic.authenticate.JwtUtil;
+import com.oganic.oganic.exception.ApiResponse;
+import com.oganic.oganic.exception.ErrorResponse;
 
 import jakarta.validation.Valid;
 
@@ -31,16 +33,19 @@ public class UserController {
     }
     
 	@PostMapping("/login")
-	public ResponseEntity<UserResponse> login(@RequestBody User request) {
+	public ResponseEntity<ApiResponse> login(@RequestBody User request) {
 		User user = userService.findByEmail(request.getEmail());
 		PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-		boolean isAuthenticate = passwordEncoder.matches(request.getPassword(), user.getPassword());
-		String token = jwtUtil.generateToken(user.getEmail());
-		UserResponse userResponse = new UserResponse();
-		userResponse.setEmail(user.getEmail());
-		userResponse.setId(user.getId());
-		userResponse.setToken(token);
-		return ResponseEntity.status(HttpStatus.ACCEPTED).body(userResponse);
+		if (user !=null && passwordEncoder.matches(request.getPassword(), user.getPassword())) {
+			String token = jwtUtil.generateToken(user.getEmail());
+			UserResponse userResponse = new UserResponse();
+			userResponse.setEmail(user.getEmail());
+			userResponse.setId(user.getId());
+			userResponse.setToken(token);
+			return ResponseEntity.ok(new ApiResponse<>(true, "Logic success", userResponse));
+		} else {
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new ApiResponse<>(false, "Invalid email or password", null));
+		}
 	}
 
     @PostMapping("/register")
