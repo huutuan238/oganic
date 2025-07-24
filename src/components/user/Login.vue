@@ -1,11 +1,12 @@
 <script setup>
 import axios from 'axios';
+import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import Breadcrumb from '../Breadcrumb.vue';
 const router = useRouter()
-
+const errorMsg = ref("");
 const login = async (e) => {
-     e.preventDefault();
+    e.preventDefault();
     const form = document.querySelector('#loginForm');
     const userData = Object.fromEntries(new FormData(form).entries());
     await axios.post('http://localhost:8080/api/users/login', JSON.stringify(userData), {
@@ -13,10 +14,12 @@ const login = async (e) => {
             'Content-Type': 'application/json'
         }
     }).then(res => {
-        localStorage.setItem('token', res.data.token);
-        localStorage.setItem('userId', res.data.id);
-        localStorage.setItem('email', res.data.email);
+        localStorage.setItem('token', res.data.data.token);
+        localStorage.setItem('userId', res.data.data.id);
+        localStorage.setItem('email', res.data.data.email);
         router.push('/')
+    }).catch(error => {
+        errorMsg.value = error.response.data.message;
     })
 }
 </script>
@@ -30,19 +33,23 @@ const login = async (e) => {
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-body">
+                        <div class="alert alert-danger" role="alert" v-show="errorMsg.length > 0">
+                            {{ errorMsg }}
+                        </div>
                         <form id="loginForm" @submit="login">
                             <div class="form-group">
                                 <label for="email">
                                     Email
                                 </label>
-                                <input type="email" class="form-control" name="email"  id="email" placeholder="Email" required />
+                                <input type="email" class="form-control" name="email" id="email" placeholder="Email"
+                                    required />
                             </div>
                             <div class="form-group">
                                 <label for="password">
                                     Password
                                 </label>
-                                <input type="password" class="form-control" id="password" name="password" placeholder="Password"
-                                    required />
+                                <input type="password" class="form-control" id="password" name="password"
+                                    placeholder="Password" required />
                             </div>
                             <button class="site-btn">
                                 Login
