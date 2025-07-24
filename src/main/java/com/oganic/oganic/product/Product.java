@@ -29,6 +29,7 @@ import lombok.Setter;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class Product {
 
 	@Id
