@@ -4,15 +4,23 @@ import { useRouter } from 'vue-router';
 import Breadcrumb from '../Breadcrumb.vue';
 const router = useRouter();
 
-const register = async() => {
-    console.log('register');
+const register = async (e) => {
+    e.preventDefault();
     const form = document.querySelector('#register-form');
     const userData = Object.fromEntries(new FormData(form).entries());
     await axios.post('http://localhost:8080/api/users/register', JSON.stringify(userData), {
         headers: {
             'Content-Type': 'application/json'
         }
-    }).then(res => router.push('/login'))
+    }).then(res => {
+        localStorage.setItem('token', res.data.data.token);
+        localStorage.setItem('userId', res.data.data.id);
+        localStorage.setItem('email', res.data.data.email);
+        router.push('/')
+    })
+        .catch(error => {
+            console.log(error)
+        })
 }
 
 </script>
@@ -21,7 +29,7 @@ const register = async() => {
     <section class="register">
         <div class="container">
             <div class="checkout__form">
-                <h3 class="text-center mb-3" style="color: #7fad39;">Register</h3>
+                <h3 class="text-center mb-3 bt-2" style="color: #7fad39;">Register</h3>
                 <form id="register-form" @submit="register">
                     <div class="row">
                         <div class="col-lg-8 col-md-6 mx-auto">
