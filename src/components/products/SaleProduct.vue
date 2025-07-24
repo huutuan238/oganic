@@ -29,7 +29,7 @@ import { Carousel, Slide } from 'vue3-carousel'
 const products = ref([])
 onMounted(() => {
     axios
-        .get('http://localhost:8080/api/products')
+        .get('http://localhost:8080/api/products/discount')
         .then(response => (products.value = response.data))
 })
 

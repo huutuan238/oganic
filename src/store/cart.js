@@ -31,17 +31,19 @@ export const cartStore = defineStore('cart', {
         },
         async fetchCart() {
             const token = localStorage.getItem('token');
+            if (token) {
+                const res = await axios.get('http://localhost:8080/api/carts', {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                        
+                    }
+                })
+                this.count = res.data.length;
+                this.total = res.data.reduce((sum, cart) => {
+                    return sum + Number(cart.product.price) * Number(cart.quatity);
+                }, 0);
+            }
 
-            const res = await axios.get('http://localhost:8080/api/carts', {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                    
-                }
-            })
-            this.count = res.data.length;
-            this.total = res.data.reduce((sum, cart) => {
-                return sum + Number(cart.product.price) * Number(cart.quatity);
-            }, 0);
         }
     }
 })
