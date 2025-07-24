@@ -49,10 +49,10 @@ public class UserController {
 	}
 
     @PostMapping("/register")
-	public ResponseEntity<User> createUser(@Valid @RequestBody User newUser) {
+	public ResponseEntity<ApiResponse> createUser(@Valid @RequestBody RegisterRequest newUser) {
 		PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(10);
 		newUser.setPassword(passwordEncoder.encode(newUser.getPassword()));
-        newUser = userService.saveUser(newUser);
-		return ResponseEntity.status(HttpStatus.CREATED).body(newUser);
+        User user = userService.saveUser(newUser);
+		return ResponseEntity.status(HttpStatus.CREATED).body(new ApiResponse<>(true, "Register success", user));
 	}
 }
