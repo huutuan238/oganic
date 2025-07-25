@@ -2,7 +2,10 @@ package com.oganic.oganic.product;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,8 +14,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.oganic.oganic.category.CategoryService;
 
 // for thymeleaf
 // @Controller
@@ -78,6 +79,9 @@ import com.oganic.oganic.category.CategoryService;
 @RequestMapping("/api/products")
 public class ProductController {
 
+	@Autowired
+	private ModelMapper modelMapper;
+
 	private final ProductService productService;
 
 	ProductController(ProductService productService) {
@@ -85,43 +89,57 @@ public class ProductController {
 	}
 
 	@GetMapping
-	public ResponseEntity<List<Product>> getAllProduct() {
+	public ResponseEntity<List<ProductResponse>> getAllProduct() {
 		List<Product> products = productService.getProducts();
-		return ResponseEntity.status(HttpStatus.OK).body(products);
+		List<ProductResponse> productResponses = products.stream()
+				.map(product -> modelMapper.map(product, ProductResponse.class))
+				.collect(Collectors.toList());
+		return ResponseEntity.status(HttpStatus.OK).body(productResponses);
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<Product> getProductDetail(@PathVariable Long id) {
+	public ResponseEntity<ProductResponse> getProductDetail(@PathVariable Long id) {
 		Product product = productService.getById(id);
-		return ResponseEntity.status(HttpStatus.OK).body(product);
+		ProductResponse productResponse = modelMapper.map(product, ProductResponse.class);
+		return ResponseEntity.status(HttpStatus.OK).body(productResponse);
 	}
 
 	@GetMapping("/list-products")
-	public ResponseEntity<Page<Product>> getAllProduct(@RequestParam("page") Optional<Integer> page) {
+	public ResponseEntity<Page<ProductResponse>> getAllProduct(@RequestParam("page") Optional<Integer> page) {
 		Integer pageNumber = page.orElse(1);
 		Page<Product> pageProduct = productService.getProductsPageable(pageNumber - 1, 3);
-		return ResponseEntity.status(HttpStatus.OK).body(pageProduct);
+		Page<ProductResponse> responsePage = pageProduct
+				.map(product -> modelMapper.map(product, ProductResponse.class));
+		return ResponseEntity.status(HttpStatus.OK).body(responsePage);
 	}
 
 	@GetMapping("/latest-products")
-	public ResponseEntity<List<Product>> getLatestProducts() {
+	public ResponseEntity<List<ProductResponse>> getLatestProducts() {
 		List<Product> latestProducts = productService.getLatestProducts();
-		return ResponseEntity.status(HttpStatus.OK).body(latestProducts);
+		List<ProductResponse> productResponses = latestProducts.stream()
+				.map(product -> modelMapper.map(product, ProductResponse.class))
+				.collect(Collectors.toList());
+		return ResponseEntity.status(HttpStatus.OK).body(productResponses);
 	}
 
 	@GetMapping("/discount")
-	public ResponseEntity<List<Product>> getDiscountProducts() {
+	public ResponseEntity<List<ProductResponse>> getDiscountProducts() {
 		List<Product> discountProducts = productService.getDiscountProducts();
-		return ResponseEntity.status(HttpStatus.OK).body(discountProducts);
+		List<ProductResponse> productResponses = discountProducts.stream()
+				.map(product -> modelMapper.map(product, ProductResponse.class))
+				.collect(Collectors.toList());
+		return ResponseEntity.status(HttpStatus.OK).body(productResponses);
 	}
 
 	@GetMapping("/search")
-	public ResponseEntity<Page<Product>> searchProducts(
+	public ResponseEntity<Page<ProductResponse>> searchProducts(
 			@RequestParam(defaultValue = "1") Integer page,
 			@RequestParam(defaultValue = "4") Integer size,
 			@RequestParam(required = false) Long categoryId,
 			@RequestParam(required = false) String q) {
 		Page<Product> pageProduct = productService.search(page - 1, size, categoryId, q);
-		return ResponseEntity.status(HttpStatus.OK).body(pageProduct);
+		Page<ProductResponse> responsePage = pageProduct
+				.map(product -> modelMapper.map(product, ProductResponse.class));
+		return ResponseEntity.status(HttpStatus.OK).body(responsePage);
 	}
 }
