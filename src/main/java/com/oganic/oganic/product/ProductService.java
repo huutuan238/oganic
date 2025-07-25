@@ -43,4 +43,8 @@ public class ProductService {
 		Pageable pageable = PageRequest.of(pageNumber, pageSize);
 		return productRepository.search(categoryId, q, pageable);
 	}
+
+	public List<Product> getRelatedProducts(Long categoryId) {
+		return productRepository.getRelatedProducts(categoryId);
+	}
 }

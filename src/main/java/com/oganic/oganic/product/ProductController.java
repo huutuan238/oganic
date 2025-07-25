@@ -101,6 +101,11 @@ public class ProductController {
 	public ResponseEntity<ProductResponse> getProductDetail(@PathVariable Long id) {
 		Product product = productService.getById(id);
 		ProductResponse productResponse = modelMapper.map(product, ProductResponse.class);
+		List<Product> relatedProducts = productService.getRelatedProducts(product.getCategory().getId());
+		List<ProductResponse> rerelatedResponseProducts = relatedProducts.stream()
+				.map(relationProduct -> modelMapper.map(relationProduct, ProductResponse.class))
+				.collect(Collectors.toList());
+		productResponse.setRelatedProducts(rerelatedResponseProducts);
 		return ResponseEntity.status(HttpStatus.OK).body(productResponse);
 	}
 

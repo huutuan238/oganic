@@ -10,13 +10,12 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ProductRepository extends JpaRepository<Product, Long> {
+public interface ProductRepository extends JpaRepository<Product, Long>, ProductRepositoryCustom {
     @Query("SELECT p FROM Product p WHERE p.discount > 0")
     List<Product> findDiscount();
 
-     @Query("SELECT p FROM Product p WHERE " + 
+    @Query("SELECT p FROM Product p WHERE " +
             "(:categoryId IS NULL OR p.category.id = :categoryId) AND " +
-            "(:q IS NULL OR p.name LIKE CONCAT('%', :q, '%'))"
-     )
+            "(:q IS NULL OR p.name LIKE CONCAT('%', :q, '%'))")
     Page<Product> search(@Param("categoryId") Long categoryId, @Param("q") String q, Pageable pageable);
 }

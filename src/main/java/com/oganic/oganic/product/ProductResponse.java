@@ -1,5 +1,6 @@
 package com.oganic.oganic.product;
 
+import java.util.List;
 import java.util.Locale.Category;
 
 import com.oganic.oganic.category.CategoryResponse;
@@ -29,4 +30,6 @@ public class ProductResponse {
 	private String image;
 
 	private Double discount;
+
+	private List<ProductResponse> relatedProducts;
 }
