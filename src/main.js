@@ -12,5 +12,10 @@ import router from './router';
 import { createApp } from 'vue'
 import App from './App.vue'
 import { createPinia } from "pinia"
-
-createApp(App).use(router).use(createPinia()).mount('#app')
+import { BootstrapVue3 } from "bootstrap-vue-3"
+const app = createApp(App)
+app.use(BootstrapVue3)
+app.use(router)
+app.use(createPinia())
+app.mount('#app')
+// createApp(App).use(router).use(createPinia()).mount('#app')
