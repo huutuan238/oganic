@@ -29,7 +29,7 @@ const filteredProducts = computed(() => {
 </script>
 <template>
     <!-- Featured Section Begin -->
-    <section class="featured spad">
+    <section class="featured spad" id="featured-product">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">

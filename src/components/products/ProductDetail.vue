@@ -27,7 +27,7 @@ onMounted(async () => {
 <template>
     <Breadcrumb :title="product.name"></Breadcrumb>
     <!-- Product Details Section Begin -->
-    <section class="product-details spad">
+    <section class="product-details spad" id="product-details">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 col-md-6">
@@ -49,7 +49,7 @@ onMounted(async () => {
                 </div>
                 <div class="col-lg-6 col-md-6">
                     <div class="product__details__text">
-                        <h3>{{ product.name }}</h3>
+                        <h3 class="product-name">{{ product.name }}</h3>
                         <div class="product__details__rating">
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
@@ -59,12 +59,12 @@ onMounted(async () => {
                             <span>(18 reviews)</span>
                         </div>
                         <div class="product__details__price">{{ product.price }}</div>
-                        <p>{{ product.description }}</p>
+                        <p class="product-description">{{ product.description }}</p>
                         <div class="product__details__quantity">
                             <div class="quantity">
                                 <div class="pro-qty">
                                     <span class="dec qtybtn">-</span>
-                                    <input type="text" :value="quatity">
+                                    <input type="number" :value="quatity" class="quatity-value">
                                     <span class="inc qtybtn" @click="increaseQuantity()">+</span>
                                 </div>
                             </div>
