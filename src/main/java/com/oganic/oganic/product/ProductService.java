@@ -39,7 +39,7 @@ public class ProductService {
 		return productRepository.findById(id).orElse(null);
 	}
 
-	public Page<Product> search(Integer pageNumber, Integer pageSize, Integer categoryId, String q) {
+	public Page<Product> search(Integer pageNumber, Integer pageSize, Long categoryId, String q) {
 		Pageable pageable = PageRequest.of(pageNumber, pageSize);
 		return productRepository.search(categoryId, q, pageable);
 	}

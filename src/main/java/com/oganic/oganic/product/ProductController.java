@@ -119,7 +119,7 @@ public class ProductController {
 	public ResponseEntity<Page<Product>> searchProducts(
 			@RequestParam(defaultValue = "1") Integer page,
 			@RequestParam(defaultValue = "4") Integer size,
-			@RequestParam(required = false) Integer categoryId,
+			@RequestParam(required = false) Long categoryId,
 			@RequestParam(required = false) String q) {
 		Page<Product> pageProduct = productService.search(page - 1, size, categoryId, q);
 		return ResponseEntity.status(HttpStatus.OK).body(pageProduct);

@@ -1,6 +1,5 @@
 package com.oganic.oganic.product;
 
-import java.util.Collection;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
@@ -19,5 +18,5 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             "(:categoryId IS NULL OR p.category.id = :categoryId) AND " +
             "(:q IS NULL OR p.name LIKE CONCAT('%', :q, '%'))"
      )
-    Page<Product> search(@Param("categoryId") Integer categoryId, @Param("q") String q, Pageable pageable);
+    Page<Product> search(@Param("categoryId") Long categoryId, @Param("q") String q, Pageable pageable);
 }
