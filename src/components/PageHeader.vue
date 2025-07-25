@@ -1,15 +1,15 @@
 <script setup>
 import { cartStore } from '@/store/cart';
 import { favoriteStore } from '@/store/favorite';
+import { userStore } from '@/store/user';
 import { useRouter } from 'vue-router';
 const favorite = favoriteStore();
 const cart = cartStore();
-let email = localStorage.getItem('email') || '';
+const user = userStore();
 const router = useRouter()
 function logout() {
-  localStorage.removeItem('token');
-  localStorage.removeItem('email');
-  localStorage.removeItem('userId');
+  user.logout();
+  cart.reset();
   router.push('/login')
 }
 </script>
@@ -44,8 +44,8 @@ function logout() {
                   <li><a href="#">English</a></li>
                 </ul>
               </div>
-              <div class="header__top__right__auth" v-if="email.length < 1">
-                <router-link :to="'/login'"><i class="fa fa-user"></i> Login</router-link>
+              <div class="header__top__right__auth" v-if="user.token.length === 0">
+                <router-link :to="'/login'"><i class="fa fa-user"></i>Login</router-link>
               </div>
               <div class="header__top__right__auth" v-else>
                 <a @click="logout()"><i class="fa fa-sign-out"></i>Logout</a>

@@ -2,7 +2,9 @@
 import axios from 'axios';
 import { useRouter } from 'vue-router';
 import Breadcrumb from '../Breadcrumb.vue';
+import { userStore } from '@/store/user';
 const router = useRouter();
+const user = userStore()
 
 const register = async (e) => {
     e.preventDefault();
@@ -13,9 +15,7 @@ const register = async (e) => {
             'Content-Type': 'application/json'
         }
     }).then(res => {
-        localStorage.setItem('token', res.data.data.token);
-        localStorage.setItem('userId', res.data.data.id);
-        localStorage.setItem('email', res.data.data.email);
+        user.login(res.data.data);
         router.push('/')
     })
         .catch(error => {
@@ -28,8 +28,7 @@ const register = async (e) => {
     <Breadcrumb :title="`Register`"></Breadcrumb>
     <section class="register">
         <div class="container">
-            <div class="checkout__form">
-                <h3 class="text-center mb-3 bt-2" style="color: #7fad39;">Register</h3>
+            <div class="checkout__form mt-3">
                 <form id="register-form" @submit="register">
                     <div class="row">
                         <div class="col-lg-8 col-md-6 mx-auto">

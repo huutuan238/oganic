@@ -44,6 +44,10 @@ export const cartStore = defineStore('cart', {
                 }, 0);
             }
 
+        },
+        reset(){
+            this.total = 0;
+            this.count = 0;
         }
     }
 })

@@ -3,7 +3,11 @@ import axios from 'axios';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import Breadcrumb from '../Breadcrumb.vue';
+import { userStore } from '@/store/user';
+import { cartStore } from '@/store/cart';
 const router = useRouter()
+const user = userStore();
+const cart = cartStore();
 const errorMsg = ref("");
 const login = async (e) => {
     e.preventDefault();
@@ -14,10 +18,9 @@ const login = async (e) => {
             'Content-Type': 'application/json'
         }
     }).then(res => {
-        localStorage.setItem('token', res.data.data.token);
-        localStorage.setItem('userId', res.data.data.id);
-        localStorage.setItem('email', res.data.data.email);
+        user.login(res.data.data);
         router.push('/')
+        cart.fetchCart();
     }).catch(error => {
         errorMsg.value = error.response.data.message;
     })
@@ -25,9 +28,6 @@ const login = async (e) => {
 </script>
 <template>
     <Breadcrumb :title="`Login`"></Breadcrumb>
-    <h3 class="text-center" style="color: #7fad39;">
-        Login
-    </h3>
     <div class="container mt-5 mb-5">
         <div class="row justify-content-center">
             <div class="col-md-6">
