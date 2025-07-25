@@ -5,21 +5,23 @@ import { onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import Breadcrumb from '../Breadcrumb.vue';
 import { cartStore } from '@/store/cart';
+import ProductItem from './ProductItem.vue';
 const favorite = favoriteStore();
 const cart = cartStore();
 const product = ref([]);
+const relatedProducts = ref([]);
 const quatity = ref(10);
 function increaseQuantity() {
-    quatity.value ++;
+    quatity.value++;
 }
 
 const route = useRoute()
-onMounted(async() => {
+onMounted(async () => {
     const productId = route.params.id;
     await axios.get(`http://localhost:8080/api/products/${productId}`)
-    .then(res => {
-        product.value = res.data;
-    })
+        .then(res => {
+            product.value = res.data;
+        })
 })
 </script>
 
@@ -32,8 +34,7 @@ onMounted(async() => {
                 <div class="col-lg-6 col-md-6">
                     <div class="product__details__pic">
                         <div class="product__details__pic__item">
-                            <img class="product__details__pic__item--large"
-                                :src="product.image" alt="">
+                            <img class="product__details__pic__item--large" :src="product.image" alt="">
                         </div>
                         <div class="product__details__pic__slider owl-carousel">
                             <img data-imgbigurl="img/product/details/product-details-2.jpg"
@@ -174,4 +175,22 @@ onMounted(async() => {
         </div>
     </section>
     <!-- Product Details Section End -->
+    <!-- Related Product Section Begin -->
+    <section class="related-product">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title related__product__title">
+                        <h2>Related Product</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3 col-md-4 col-sm-6" v-for="relatedProduct in product.relatedProducts">
+                    <ProductItem :product="relatedProduct"></ProductItem>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Related Product Section End -->
 </template>
