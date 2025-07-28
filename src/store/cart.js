@@ -22,7 +22,6 @@ export const cartStore = defineStore('cart', {
                     'Content-Type': 'application/json'
                 }
             }).then(res => {
-                console.log(res.data);
                 this.count++;
             })
                 .catch(error =>
@@ -48,6 +47,9 @@ export const cartStore = defineStore('cart', {
         reset(){
             this.total = 0;
             this.count = 0;
+        },
+        updateTotal(total) {
+            this.total = total;
         }
     }
 })

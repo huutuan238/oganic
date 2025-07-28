@@ -50,7 +50,8 @@
                 <div class="col-lg-12">
                     <div class="shoping__cart__btns">
                         <router-link :to="'./'" class="primary-btn cart-btn">CONTINUE SHOPPING</router-link>
-                        <a href="#" class="primary-btn cart-btn cart-btn-right"><span class="icon_loading"></span>
+                        <a @click="updateCart()" class="primary-btn cart-btn cart-btn-right"><span
+                                class="icon_loading"></span>
                             Upadate Cart</a>
                     </div>
                 </div>
@@ -85,7 +86,9 @@
 import axios from 'axios';
 import Breadcrumb from '../Breadcrumb.vue';
 import { computed, onMounted, ref } from 'vue';
+import { cartStore } from '@/store/cart';
 let orders = ref([])
+const cart = cartStore();
 const token = localStorage.getItem('token');
 
 onMounted(async () => {
@@ -120,5 +123,25 @@ const total = computed(() => {
         return sum + Number(order.product.price) * Number(order.quatity);
     }, 0);
 });
+
+function updateCart() {
+    const orderInfos = orders.value.map(order => {
+        return {
+            id: order.id,
+            userId: localStorage.getItem("userId"),
+            quatity: order.quatity
+        }
+    })
+    axios
+        .post('http://localhost:8080/api/carts/update', JSON.stringify(orderInfos), {
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => {
+            cart.updateTotal(total.value);
+        })
+}
 
 </script>
