@@ -37,7 +37,7 @@ public class UserController {
 			userResponse.setEmail(user.getEmail());
 			userResponse.setId(user.getId());
 			userResponse.setToken(token);
-			return ResponseEntity.ok(new ApiResponse<>(true, "Logic success", userResponse));
+			return ResponseEntity.ok(new ApiResponse<>(true, "Login success", userResponse));
 		} else {
 			return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
 					.body(new ApiResponse<>(false, "Invalid email or password", null));
