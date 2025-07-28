@@ -49,6 +49,10 @@ public class UserController {
 		PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(10);
 		newUser.setPassword(passwordEncoder.encode(newUser.getPassword()));
 		User user = userService.saveUser(newUser);
-		return ResponseEntity.status(HttpStatus.CREATED).body(new ApiResponse<>(true, "Register success", user));
+		if (user == null) {
+			return ResponseEntity.status(HttpStatus.CONFLICT).body(new ApiResponse<>(false, "Email already exists", user));
+		} else {
+			return ResponseEntity.status(HttpStatus.CREATED).body(new ApiResponse<>(true, "Register success", user));	
+		}
 	}
 }
