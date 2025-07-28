@@ -15,7 +15,7 @@ import com.oganic.oganic.exception.ApiResponse;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("api/users")
+@RequestMapping("/api/users")
 public class UserController {
 
 	private final UserService userService;
