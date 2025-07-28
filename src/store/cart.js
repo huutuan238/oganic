@@ -1,5 +1,7 @@
 import axios from "axios";
 import { defineStore } from "pinia";
+import {useToast} from 'vue-toast-notification';
+const $toast = useToast();
 
 
 export const cartStore = defineStore('cart', {
@@ -23,9 +25,10 @@ export const cartStore = defineStore('cart', {
                 }
             }).then(res => {
                 this.count++;
+                $toast.success("Add to cart success")
             })
                 .catch(error =>
-                    console.log(error)
+                    $toast.error(error.data)
                 )
         },
         async fetchCart() {

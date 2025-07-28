@@ -141,7 +141,9 @@ function updateCart() {
         })
         .then(response => {
             cart.updateTotal(total.value);
+            $toast.success('Cart updated!!!');
         })
 }
-
+import {useToast} from 'vue-toast-notification';
+const $toast = useToast();
 </script>
