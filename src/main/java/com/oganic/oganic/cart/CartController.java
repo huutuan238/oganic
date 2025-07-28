@@ -1,11 +1,5 @@
 package com.oganic.oganic.cart;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import com.oganic.oganic.user.User;
-import com.oganic.oganic.user.UserService;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -15,9 +9,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.oganic.oganic.exception.ApiResponse;
+import com.oganic.oganic.user.User;
+import com.oganic.oganic.user.UserService;
 
 @RestController
 @RequestMapping("api/carts")
@@ -52,11 +52,11 @@ public class CartController {
         return ResponseEntity.status(HttpStatus.CREATED).body(cartResponse);
     }
 
+    @PreAuthorize("isAuthenticated()")
     @PostMapping("/update")
-    public ResponseEntity<CartResponse> updateCart(@RequestBody CartRequest request) {
-        Cart cart = cartService.addCart(request);
-         CartResponse cartResponse = modelMapper.map(cart, CartResponse.class);
-        return ResponseEntity.status(HttpStatus.CREATED).body(cartResponse);
+    public ResponseEntity<ApiResponse> updateCart(@RequestBody List<CartRequest> requests) {
+        requests.forEach(request -> cartService.updateCart(request));
+        return ResponseEntity.status(HttpStatus.CREATED).body(new ApiResponse<>(true, "Update success", null));
     }
 
 }
