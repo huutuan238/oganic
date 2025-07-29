@@ -65,7 +65,7 @@ import LatestProduct from './products/LatestProduct.vue';
             </div>
             <div class="humberger__menu__contact">
                 <ul>
-                    <li><i class="fa fa-envelope"></i> hello@colorlib.com</li>
+                    <li><i class="fa fa-envelope"></i> huutuan23898@gmail.com</li>
                     <li>Free Shipping for all Order of $99</li>
                 </ul>
             </div>

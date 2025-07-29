@@ -9,9 +9,9 @@
               <a href="./index.html"><img src="../assets/img/logo.png" alt=""></a>
             </div>
             <ul>
-              <li>Address: 60-49 Road 11378 New York</li>
-              <li>Phone: +65 11.188.888</li>
-              <li>Email: hello@colorlib.com</li>
+              <li>Address: Kariya, Aichi</li>
+              <li>Phone: 080 4951 7952</li>
+              <li>Email: huutuan23898@gmail.com</li>
             </ul>
           </div>
         </div>
@@ -29,8 +29,8 @@
             <ul>
               <li><a href="#">Who We Are</a></li>
               <li><a href="#">Our Services</a></li>
-              <li><a href="#">Projects</a></li>
-              <li><a href="#">Contact</a></li>
+              <li><a href="https://github.com/huutuan238">Projects</a></li>
+              <li><router-link :to="'/contact'">Contact</router-link></li>
               <li><a href="#">Innovation</a></li>
               <li><a href="#">Testimonials</a></li>
             </ul>
