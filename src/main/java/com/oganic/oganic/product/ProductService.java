@@ -47,4 +47,10 @@ public class ProductService {
 	public List<Product> getRelatedProducts(Long categoryId) {
 		return productRepository.getRelatedProducts(categoryId);
 	}
+
+	public Product updateStock(Long id, Integer value) {
+		Product product = productRepository.findById(id).orElseThrow();
+		product.setStock(product.getStock() - value);
+		return productRepository.save(product);
+	}
 }

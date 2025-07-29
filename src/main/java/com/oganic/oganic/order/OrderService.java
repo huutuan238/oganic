@@ -13,6 +13,10 @@ import com.oganic.oganic.cart.Cart;
 import com.oganic.oganic.cart.CartReponsitory;
 import com.oganic.oganic.cart.CartRequest;
 import com.oganic.oganic.product.ProductRepository;
+import com.oganic.oganic.product.ProductService;
+import com.oganic.oganic.user.User;
+import com.oganic.oganic.user.UserRepository;
+import com.oganic.oganic.user.UserService;
 
 import jakarta.transaction.Transactional;
 
@@ -22,12 +26,16 @@ public class OrderService {
     private final OrderRepository orderRepository;
     private final ProductRepository productRepository;
     private final CartReponsitory cartReponsitory;
+    private final ProductService productService;
+    private final UserRepository userRepository;
 
     public OrderService(OrderRepository orderRepository, ProductRepository productRepository,
-            CartReponsitory cartReponsitory) {
+            CartReponsitory cartReponsitory, ProductService productService, UserRepository userRepository) {
         this.orderRepository = orderRepository;
         this.productRepository = productRepository;
         this.cartReponsitory = cartReponsitory;
+        this.productService = productService;
+        this.userRepository = userRepository;
     }
 
     @Transactional
@@ -38,6 +46,8 @@ public class OrderService {
         List<Cart> carts = cartReponsitory.findAll();
 
         List<OrderDetail> details = carts.stream().map(item -> {
+            // update stock product
+            productService.updateStock(item.getProduct().getId(), item.getQuatity());
             OrderDetail detail = new OrderDetail();
             detail.setProduct(item.getProduct());
             detail.setQuatity(item.getQuatity());
@@ -45,8 +55,8 @@ public class OrderService {
             return detail;
         }).collect(Collectors.toList());
         order.setOrderDetails(details);
-        cartReponsitory.deleteAll(carts);
-
+        User user = userRepository.findById(cartRequest.getUserId()).orElseThrow();
+        cartReponsitory.deleteByUser(user);
         return orderRepository.save(order);
     }
 
