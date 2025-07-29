@@ -52,4 +52,8 @@ public class CartService {
         cart = cartReponsitory.save(cart);
         return cart;
     }
+
+    public void removeCart(Long id) {
+        cartReponsitory.deleteById(id);
+    }
 }
