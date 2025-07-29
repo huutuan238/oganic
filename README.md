@@ -7,7 +7,7 @@ A full-stack web application built with **Spring Boot (backend)** and **Vue.js (
 ## 📁 Project Structure
 
 ```
-merged-project/
+oganic/
 ├── backend/       # Spring Boot application
 └── frontend/      # Vue.js application
 ```
