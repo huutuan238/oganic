@@ -1,7 +1,8 @@
 # 🧩 Full Stack Web Application
 
-A full-stack web application built with **Spring Boot (backend)** and **Vue.js (frontend)**.
+A full-stack Oganic Web application built with **Spring Boot (backend)** and **Vue.js (frontend)**.
 
+![alt text](image.png)
 ---
 
 ## 📁 Project Structure
@@ -17,6 +18,16 @@ oganic/
 ## 🚀 Getting Started
 
 ### 🔧 Backend (Spring Boot)
+
+0. Setup database
+The backend use MySQL
+Change config database in `application.properties`
+   ```bash
+   spring.datasource.url=jdbc:mysql://localhost:{port}/{schema} # db url
+   spring.datasource.username=root # db username
+   spring.datasource.password=***** # db password
+   ```
+
 
 1. Go to the backend folder:
    ```bash
