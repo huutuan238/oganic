@@ -3,10 +3,15 @@ import Breadcrumb from '../Breadcrumb.vue';
 import axios from 'axios';
 import { computed, onMounted, ref } from 'vue';
 let orders = ref([])
+const token = localStorage.getItem('token');
 
 onMounted(async () => {
     await axios
-        .get('http://localhost:8080/api/carts')
+        .get('http://localhost:8080/api/carts', {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
         .then(response => (orders.value = response.data))
 })
 const total = computed(() => {
@@ -16,10 +21,11 @@ const total = computed(() => {
 });
 
 function checkout() {
-    const ordersData = {userId: 1}
+    const ordersData = { userId: localStorage.getItem('userId') }
     axios.post('http://localhost:8080/api/orders/checkout', JSON.stringify(ordersData), {
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
         }
     }).then(res => {
         router.push('/')
