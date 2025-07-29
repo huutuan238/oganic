@@ -1,5 +1,6 @@
 package com.oganic.oganic.blog;
 
-public class BlogRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
 
+public interface BlogRepository extends JpaRepository<Blog, Long> {
 }

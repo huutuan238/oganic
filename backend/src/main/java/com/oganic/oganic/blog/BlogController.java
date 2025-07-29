@@ -1,21 +1,30 @@
 package com.oganic.oganic.blog;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import java.util.List;
 
-@Controller
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.oganic.oganic.exception.ApiResponse;
+
+
+@RestController
+@RequestMapping("/api/blog")
 public class BlogController {
-	
-	@GetMapping("/blog")
-	public String blog(Model model) {
-		
-		return "blog";
+	private final BlogService blogService;
+
+	public BlogController(BlogService blogService) {
+		this.blogService = blogService;
+	}
+
+	@GetMapping
+	public ResponseEntity<ApiResponse> getBlogs() {
+		List<Blog> blogs = blogService.getBlogs();
+		return ResponseEntity.status(HttpStatus.OK).body(new ApiResponse<>(true, "Get blogs success", blogs));
 	}
 	
-	@GetMapping("/blog-details")
-	public String blogDetails(Model model) {
-		
-		return "blog-details";
-	}
+
 }
