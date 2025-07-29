@@ -102,10 +102,9 @@ onMounted(async () => {
 })
 
 function removeCart(orderId) {
+    const removeCartInfo = orders.value.find(order => order.id === orderId);
     orders.value = orders.value.find(o => o.id !== orderId);
-    axios.delete(`http://localhost:8080/api/orders/remove-cart/${orderId}`)
-        .then(res => console("remove cart"))
-        .catch(error => console.log("remove cart error"))
+    cart.removeCart(removeCartInfo);
 }
 
 function increaseQuantity(orderId) {
@@ -119,9 +118,9 @@ function decreaseQuantity(orderId) {
 }
 
 const total = computed(() => {
-    return orders.value.reduce((sum, order) => {
+    return orders.value?.reduce((sum, order) => {
         return sum + Number(order.product.price) * Number(order.quatity);
-    }, 0);
+    }, 0) || 0;
 });
 
 function updateCart() {

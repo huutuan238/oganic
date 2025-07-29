@@ -14,6 +14,10 @@ function increaseQuantity() {
     quatity.value++;
 }
 
+function decreaseQuantity() {
+    quatity.value--;
+}
+
 const route = useRoute()
 onMounted(async () => {
     const productId = route.params.id;
@@ -58,24 +62,23 @@ onMounted(async () => {
                             <i class="fa fa-star-half-o"></i>
                             <span>(18 reviews)</span>
                         </div>
-                        <div class="product__details__price">{{ product.price }}</div>
+                        <div class="product__details__price">${{ product.price }}</div>
                         <p class="product-description">{{ product.description }}</p>
                         <div class="product__details__quantity">
                             <div class="quantity">
                                 <div class="pro-qty">
-                                    <span class="dec qtybtn">-</span>
-                                    <input type="number" :value="quatity" class="quatity-value">
+                                    <span class="dec qtybtn" @click="decreaseQuantity()">-</span>
+                                    <input id="cart-quatity" type="number" :value="quatity" class="quatity-value">
                                     <span class="inc qtybtn" @click="increaseQuantity()">+</span>
                                 </div>
                             </div>
                         </div>
-                        <a @click="cart.addCart(product.id, quatity)" class="primary-btn">ADD TO CARD</a>
-                        <a @click="favorite.increment" class="heart-icon"><span class="icon_heart_alt"></span></a>
+                        <a @click.prevent="cart.addCart(product.id, quatity)" class="primary-btn">ADD TO CARD</a>
+                        <a @click="favorite.increment" class="heart-icon"><i class="fa fa-heart"></i></a>
                         <ul>
                             <li>
-                                <b>Availability</b>
-                                <span v-if="product.stock">In Stock</span>
-                                <span v-else>Not Available</span>
+                                <b>Stock</b>
+                                <span class="stock">{{ product.stock }}</span>
                             </li>
                             <li><b>Shipping</b> <span>01 day shipping. <samp>Free pickup today</samp></span></li>
                             <li><b>Weight</b> <span>0.5 kg</span></li>
