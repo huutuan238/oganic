@@ -1,0 +1,56 @@
+package com.oganic.oganic.product;
+
+import java.util.List;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Service;
+
+@Service
+public class ProductService {
+	private final ProductRepository productRepository;
+	
+	public ProductService(ProductRepository productRepository) {
+		this.productRepository = productRepository;
+	}
+	
+	public List<Product> getProducts() {
+		
+		return productRepository.findAll();
+	}
+	
+	public Page<Product> getProductsPageable(Integer pageNumber, Integer pageSize) {
+		Pageable pageable = PageRequest.of(pageNumber, pageSize);
+		return productRepository.findAll(pageable);
+	}
+	
+	
+	public List<Product> getLatestProducts() {
+		return productRepository.findAll(Sort.by("createdAt"));
+	}
+
+	public List<Product> getDiscountProducts() {
+		return productRepository.findDiscount();
+	}
+
+	public Product getById(Long id){
+		return productRepository.findById(id).orElse(null);
+	}
+
+	public Page<Product> search(Integer pageNumber, Integer pageSize, Long categoryId, String q) {
+		Pageable pageable = PageRequest.of(pageNumber, pageSize);
+		return productRepository.search(categoryId, q, pageable);
+	}
+
+	public List<Product> getRelatedProducts(Long categoryId) {
+		return productRepository.getRelatedProducts(categoryId);
+	}
+
+	public Product updateStock(Long id, Integer value) {
+		Product product = productRepository.findById(id).orElseThrow();
+		product.setStock(product.getStock() - value);
+		return productRepository.save(product);
+	}
+}
