@@ -1,5 +1,5 @@
 <script setup>
-import axios from 'axios';
+import blogService from '@/api/blogService';
 import { onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import BlogSideBar from './BlogSideBar.vue';
@@ -8,10 +8,7 @@ const blog = ref([]);
 const route = useRoute();
 onMounted( async () => {
     const blogId = route.params.id;
-    await axios.get(`http://localhost:8080/api/blog/${blogId}`)
-        .then(res => {
-            blog.value = res.data.data;
-        })
+    blog.value = await blogService.getBlogDetail(blogId);
 })
 </script>
 <template>

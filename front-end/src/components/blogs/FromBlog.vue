@@ -1,14 +1,11 @@
 <script setup lang="js">
+import blogService from '@/api/blogService';
 import { onMounted, ref } from 'vue';
 import BlogItem from './BlogItem.vue';
-import axios from 'axios';
 const blogs = ref([]);
 
 onMounted(async () => {
-    await axios.get(`http://localhost:8080/api/blog`)
-        .then(res => {
-            blogs.value = res.data.data;
-        })
+    blogs.value = await blogService.getBlogs();
 })
 
 </script>
@@ -26,7 +23,7 @@ onMounted(async () => {
             </div>
             <div class="row">
                 <div class="col-lg-4 col-md-4 col-sm-6" v-for="blog in blogs">
-                    <BlogItem :blog="blog" :show-list-more="false" ></BlogItem>
+                    <BlogItem :blog="blog" :show-list-more="false"></BlogItem>
                 </div>
             </div>
         </div>

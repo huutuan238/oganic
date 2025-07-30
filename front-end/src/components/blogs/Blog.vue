@@ -1,16 +1,13 @@
 <script setup lang="js">
+import blogService from '@/api/blogService';
 import { onMounted, ref } from 'vue';
 import Breadcrumb from '../Breadcrumb.vue';
-import axios from 'axios';
-import BlogSideBar from './BlogSideBar.vue';
 import BlogItem from './BlogItem.vue';
-const blogs = ref([]);
+import BlogSideBar from './BlogSideBar.vue';
+let blogs = ref([]);
 
 onMounted(async () => {
-    await axios.get(`http://localhost:8080/api/blog`)
-        .then(res => {
-            blogs.value = res.data.data;
-        })
+    blogs.value = await blogService.getBlogs();
 })
 
 </script>
