@@ -3,6 +3,7 @@ import { onMounted, ref } from 'vue';
 import Breadcrumb from '../Breadcrumb.vue';
 import axios from 'axios';
 import BlogSideBar from './BlogSideBar.vue';
+import BlogItem from './BlogItem.vue';
 const blogs = ref([]);
 
 onMounted(async () => {
@@ -23,20 +24,7 @@ onMounted(async () => {
                 <div class="col-lg-8 col-md-7 order-md-1 order-1">
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-6" v-for="blog in blogs">
-                            <div class="blog__item">
-                                <div class="blog__item__pic">
-                                    <img alt="" :src="blog.imageUrl">
-                                </div>
-                                <div class="blog__item__text">
-                                    <ul>
-                                        <li><i class="fa fa-calendar-o"></i> {{ blog.updatedAt }}</li>
-                                        <li><i class="fa fa-comment-o"></i> 5</li>
-                                    </ul>
-                                    <h5><router-link :to="`/blog/${blog.id}`">{{ blog.title }}</router-link></h5>
-                                    <p>{{ blog.content }}</p>
-                                    <router-link :to="`/blog/${blog.id}`" class="blog__btn">READ MORE <span class="arrow_right"></span></router-link>
-                                </div>
-                            </div>
+                            <BlogItem :blog="blog" :show-list-more="true"></BlogItem>
                         </div>
                         <div class="col-lg-12">
                             <div class="product__pagination blog__pagination">
