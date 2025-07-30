@@ -3,11 +3,11 @@ import axios from 'axios';
 import { onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
 
-const blog = ref({});
+const blog = ref([]);
 const route = useRoute();
-onMounted( () => {
+onMounted( async () => {
     const blogId = route.params.id;
-    axios.get(`http://localhost:8080/api/blog/${blogId}`)
+    await axios.get(`http://localhost:8080/api/blog/${blogId}`)
         .then(res => {
             blog.value = res.data.data;
         })
@@ -20,9 +20,9 @@ onMounted( () => {
             <div class="row">
                 <div class="col-lg-12">
                     <div class="blog__details__hero__text">
-                        <h2>The Moment You Need To Remove Garlic From The Menu</h2>
+                        <h2>{{ blog.title }}</h2>
                         <ul>
-                            <li>By Michael Scofield</li>
+                            <li>{{ blog.author?.firstName }}</li>
                             <li>{{ blog.updatedAt }}</li>
                             <li>8 Comments</li>
                         </ul>
@@ -114,7 +114,7 @@ onMounted( () => {
                                         <img src="../../assets/img/blog/details/details-author.jpg" alt="">
                                     </div>
                                     <div class="blog__details__author__text">
-                                        <h6>Michael Scofield</h6>
+                                        <h6>{{ blog.author?.firstName }}</h6>
                                         <span>Admin</span>
                                     </div>
                                 </div>
@@ -122,7 +122,7 @@ onMounted( () => {
                             <div class="col-lg-6">
                                 <div class="blog__details__widget">
                                     <ul>
-                                        <li><span>Categories:</span> Food</li>
+                                        <li><span>Categories:</span> {{ blog.category?.name }}</li>
                                         <li><span>Tags:</span> All, Trending, Cooking, Healthy Food, Life Style</li>
                                     </ul>
                                     <div class="blog__details__social">
