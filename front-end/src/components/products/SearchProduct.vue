@@ -1,7 +1,9 @@
 <script setup>
+import Breadcrumb from '../Breadcrumb.vue';
 import ProductItem from './ProductItem.vue';
 </script>
 <template>
+    <Breadcrumb :title="this.$route.query.q || this.$route.query.categoryId"></Breadcrumb>
     <section class="search-product spad">
         <div class="container">
             <div class="row featured__filter">

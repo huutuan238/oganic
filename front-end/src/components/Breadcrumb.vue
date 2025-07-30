@@ -17,8 +17,8 @@ const props = defineProps({
                     <div class="breadcrumb__text">
                         <h2>{{ props.title }}</h2>
                         <div class="breadcrumb__option">
-                            <router-link :to="'/'">Home</router-link>
-                            <span>{{ props.title }}</span>
+                            <router-link :to="'/'"> Home </router-link>
+                            <span> {{ props.title }}</span>
                         </div>
                     </div>
                 </div>
