@@ -93,9 +93,9 @@ onMounted(async () => {
                                         <li><i class="fa fa-calendar-o"></i> {{ blog.updatedAt }}</li>
                                         <li><i class="fa fa-comment-o"></i> 5</li>
                                     </ul>
-                                    <h5><router-link :to="'/blog-details'">{{ blog.title }}</router-link></h5>
+                                    <h5><router-link :to="`/blog/${blog.id}`">{{ blog.title }}</router-link></h5>
                                     <p>{{ blog.content }}</p>
-                                    <router-link :to="'/blog-details'" class="blog__btn">READ MORE <span class="arrow_right"></span></router-link>
+                                    <router-link :to="`/blog/${blog.id}`" class="blog__btn">READ MORE <span class="arrow_right"></span></router-link>
                                 </div>
                             </div>
                         </div>

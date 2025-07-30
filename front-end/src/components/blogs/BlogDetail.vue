@@ -1,6 +1,21 @@
+<script setup>
+import axios from 'axios';
+import { onMounted, ref } from 'vue';
+import { useRoute } from 'vue-router';
+
+const blog = ref({});
+const route = useRoute();
+onMounted( () => {
+    const blogId = route.params.id;
+    axios.get(`http://localhost:8080/api/blog/${blogId}`)
+        .then(res => {
+            blog.value = res.data.data;
+        })
+})
+</script>
 <template>
-        <!-- Blog Details Hero Begin -->
-    <section class="blog-details-hero set-bg" data-setbg="img/blog/details/details-hero.jpg">
+    <!-- Blog Details Hero Begin -->
+    <section class="blog-details-hero set-bg" :style="`background-image: url(/img/blog/details/details-hero.jpg)`">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -8,7 +23,7 @@
                         <h2>The Moment You Need To Remove Garlic From The Menu</h2>
                         <ul>
                             <li>By Michael Scofield</li>
-                            <li>January 14, 2019</li>
+                            <li>{{ blog.updatedAt }}</li>
                             <li>8 Comments</li>
                         </ul>
                     </div>
@@ -87,21 +102,9 @@
                 </div>
                 <div class="col-lg-8 col-md-7 order-md-1 order-1">
                     <div class="blog__details__text">
-                        <img src="../../assets/img/blog/details/details-pic.jpg" alt="">
-                        <p>Sed porttitor lectus nibh. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet
-                            dui. Curabitur non nulla sit amet nisl tempus convallis quis ac lectus. Mauris blandit
-                            aliquet elit, eget tincidunt nibh pulvinar a. Vivamus magna justo, lacinia eget consectetur
-                            sed, convallis at tellus. Sed porttitor lectus nibh. Donec sollicitudin molestie malesuada.
-                            Curabitur non nulla sit amet nisl tempus convallis quis ac lectus. Proin eget tortor risus.
-                            Donec rutrum congue leo eget malesuada. Curabitur non nulla sit amet nisl tempus convallis
-                            quis ac lectus. Donec sollicitudin molestie malesuada. Nulla quis lorem ut libero malesuada
-                            feugiat. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem.</p>
-                        <h3>The corner window forms a place within a place that is a resting point within the large
-                            space.</h3>
-                        <p>The study area is located at the back with a view of the vast nature. Together with the other
-                            buildings, a congruent story has been managed in which the whole has a reinforcing effect on
-                            the components. The use of materials seeks connection to the main house, the adjacent
-                            stables</p>
+                        <img :src="blog.imageUrl" alt="" style="width: 100%">
+                        <h3>{{ blog.title }}</h3>
+                        <p>{{ blog.content }}</p>
                     </div>
                     <div class="blog__details__content">
                         <div class="row">

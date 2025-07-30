@@ -20,7 +20,7 @@ const routes = [
   { path: '/checkout', component: Checkout, meta: { requiresAuth: true }  },
   { path: '/contact', component: Contact },
   { path: '/blog', component: Blog },
-  { path: '/blog-details', component: BlogDetail },
+  { path: '/blog/:id', component: BlogDetail, props:true },
   { path: '/products/search', component: SearchProduct },
   { path: '/login', component: Login },
   { path: '/register', component: Register },
